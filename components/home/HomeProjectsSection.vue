@@ -5,7 +5,6 @@ type Project = {
   description: string;
   tags: string[];
   imageSrc: string;
-  imageAvailable: boolean;
   link?: string;
   right?: boolean;
 };
@@ -16,16 +15,14 @@ const projects: Project[] = [
     subtitle: "Interne App fuer R&D, Fertigung und Cloud-Engineering",
     description: "Bei Solarnative entwickelte ich eine vielseitige Electron-Anwendung fuer Forschung, Fertigung, Support und Cloud-Engineering mit AWS-API-Integration und Hardware-Schnittstellen.",
     tags: ["Electron", "Vue", "Node.js", "AWS"],
-    imageSrc: "/assets/proj/proj_FabApp.jpg",
-    imageAvailable: false,
+    imageSrc: "/proj/proj_FabApp.jpg",
   },
   {
     title: "Apojet App",
     subtitle: "React Native Apojet App fuer Android",
     description: "Fuer das ARZ erweiterte ich die bestehende Apojet App und entwickelte eine neue Android App mit React Native.",
     tags: ["App", "React Native", "Android"],
-    imageSrc: "/assets/proj/proj_ApojetAndroidApp.png",
-    imageAvailable: false,
+    imageSrc: "/proj/proj_ApojetAndroidApp.png",
     link: "https://play.google.com/store/apps/details?id=de.cida.mobile.apojet",
     right: true,
   },
@@ -34,8 +31,7 @@ const projects: Project[] = [
     subtitle: "Neue Webseite mit individueller CMS-Loesung",
     description: "Neben den klassischen Seiten entstand eine massgeschneiderte CMS-Loesung in PHP mit Verkaufsstellen-Finder und OpenStreetMap-Integration.",
     tags: ["Frontend", "Bootstrap", "PHP"],
-    imageSrc: "/assets/proj/proj_MoenichWebsite.jpg",
-    imageAvailable: false,
+    imageSrc: "/proj/proj_MoenichWebsite.jpg",
     link: "http://www.spargelhof-moenich.de/",
   },
   {
@@ -43,8 +39,7 @@ const projects: Project[] = [
     subtitle: "Benutzeroberflaeche zur Steuerung eines Thor Roboters",
     description: "Electron-App zur praezisen Steuerung eines 3D-gedruckten Open-Source 6-Achsen-Roboters im FabLab Darmstadt Umfeld.",
     tags: ["Node", "Electron", "Robotik"],
-    imageSrc: "/assets/proj/proj_RobotControlGUI.jpg",
-    imageAvailable: false,
+    imageSrc: "/proj/proj_RobotControlGUI.jpg",
     link: "https://github.com/rabakilgur/ThorRobotGUI",
     right: true,
   },
@@ -53,8 +48,7 @@ const projects: Project[] = [
     subtitle: "Wuerfel-App fuer iOS, Android und Web",
     description: "Aus einer einfachen Idee wurde eine eigene App fuer mehrere Plattformen und mein Einstieg in die App-Entwicklung.",
     tags: ["PhoneGap", "Hybrid App", "Framework 7"],
-    imageSrc: "/assets/proj/proj_DiceProjectApp.jpg",
-    imageAvailable: false,
+    imageSrc: "/proj/proj_DiceProjectApp.jpg",
     link: "https://robin-garbe.de/p/dice_project",
   },
   {
@@ -62,8 +56,7 @@ const projects: Project[] = [
     subtitle: "Programm zur Steuerung von Maschinen via OPC-UA",
     description: "Entwickelt im Rahmen eines Bachelorpraktikums zur dynamischen Auftragsverteilung auf industrielle Maschinen.",
     tags: ["Node", "Electron", "OPC-UA"],
-    imageSrc: "/assets/proj/proj_OPCFactoryControlPanel.jpg",
-    imageAvailable: false,
+    imageSrc: "/proj/proj_OPCFactoryControlPanel.jpg",
     link: "https://github.com/rabakilgur/OPC_Factory_Control_Panel",
     right: true,
   },
@@ -80,11 +73,7 @@ const projects: Project[] = [
         class="overflow-hidden bg-white rounded-3xl border shadow-sm transition border-zinc-200 hover:shadow-lg dark:border-zinc-800 dark:bg-zinc-900">
         <div class="grid gap-0 md:grid-cols-2">
           <div :class="project.right ? 'md:order-2' : ''" class="relative min-h-56 bg-zinc-100 dark:bg-zinc-800">
-            <img v-if="project.imageAvailable" :src="project.imageSrc" :alt="project.title" class="object-cover w-full h-full" loading="lazy" />
-            <div v-else class="flex flex-col gap-3 justify-center items-center p-6 h-full text-center bg-gradient-to-br min-h-56 from-zinc-200 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900">
-              <p class="px-3 py-1 text-xs font-bold tracking-wider uppercase rounded-full border border-zinc-400/70 text-zinc-600 dark:border-zinc-600 dark:text-zinc-300">Placeholder</p>
-              <p class="text-sm text-zinc-500 dark:text-zinc-400">{{ project.imageSrc }}</p>
-            </div>
+            <NuxtImg :src="project.imageSrc" :alt="project.title" class="object-cover w-full h-full" loading="lazy" />
           </div>
 
           <div :class="project.right ? 'md:order-1' : ''" class="p-6 sm:p-8">
