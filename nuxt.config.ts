@@ -1,8 +1,10 @@
+import tailwindcss from "@tailwindcss/vite";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', "@nuxt/image", "@nuxt/ui"],
-  css: ['~/assets/scss/main.scss'],
+  modules: ["@nuxt/image", "@nuxt/ui"],
+  css: ["~/assets/css/tailwind.css", "~/assets/scss/main.scss"],
 
   app: {
     head: {
@@ -71,4 +73,8 @@ export default defineNuxtConfig({
     // prerender index route by default
     '/': { prerender: true },
   },
+  vite: {
+    plugins: [tailwindcss() as any],
+  },
+  compatibilityDate: "2026-03-03",
 });
