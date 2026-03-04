@@ -97,10 +97,10 @@ const projects: Project[] = [
 ];
 
 const profileLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/robin-garbe/" },
-  { label: "GitHub", href: "https://github.com/rabakilgur" },
-  { label: "CodePen", href: "https://codepen.io/rabakilgur" },
-  { label: "Telegram", href: "https://t.me/rabakilgur" },
+  { label: "LinkedIn", icon: "i-mdi-linkedin", href: "https://www.linkedin.com/in/robin-garbe/" },
+  { label: "GitHub", icon: "i-mdi-github", href: "https://github.com/rabakilgur" },
+  { label: "CodePen", icon: "i-mdi-codepen", href: "https://codepen.io/rabakilgur" },
+  { label: "Telegram", icon: "i-mdi-telegram", href: "https://t.me/rabakilgur" },
 ];
 
 const contactLinks = [
@@ -181,10 +181,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
-            <UCard v-for="item in quickStats" :key="item.label" variant="subtle">
-              <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ item.label }}</p>
-              <p class="mt-2 text-xl font-semibold text-highlighted">{{ item.value }}</p>
-            </UCard>
+            <UPageCard v-for="item in quickStats" :key="item.label" :title="item.label" :description="item.value" spotlight spotlight-color="primary" />
           </div>
         </UContainer>
       </section>
@@ -207,7 +204,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Focus Areas</h2>
           </div>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <UCard v-for="(area, idx) in focusAreas" :key="area.title" variant="soft" class="border-t-4 border-t-primary-500/70">
+            <UPageCard v-for="(area, idx) in focusAreas" :key="area.title" spotlight spotlight-color="primary">
               <template #header>
                 <h3 class="font-semibold text-highlighted">
                   <UBadge :color="accentTones[idx % accentTones.length]" variant="soft">{{ area.title }}</UBadge>
@@ -216,7 +213,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               <ul class="space-y-2 text-sm text-toned">
                 <li v-for="detail in area.details" :key="detail">{{ detail }}</li>
               </ul>
-            </UCard>
+            </UPageCard>
           </div>
           <div class="flex flex-wrap gap-2 justify-center">
             <UBadge v-for="(tech, idx) in technologies" :key="tech" :color="accentTones[idx % accentTones.length]" variant="subtle" size="md">
@@ -256,7 +253,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Selected Projects</h2>
           </div>
           <div class="grid gap-5 lg:grid-cols-2">
-            <UCard v-for="(project, idx) in projects" :key="project.title" class="overflow-hidden" variant="soft">
+            <UPageCard v-for="(project, idx) in projects" :key="project.title" spotlight :spotlight-color="accentTones[idx % accentTones.length]">
               <NuxtImg :src="project.imageSrc" :alt="project.title" class="object-cover w-full h-48 rounded-lg" loading="lazy" />
               <div class="mt-5">
                 <p class="text-xs font-semibold tracking-wide uppercase text-muted">
@@ -273,7 +270,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
                   Open Project
                 </UButton>
               </div>
-            </UCard>
+            </UPageCard>
           </div>
         </section>
 
@@ -283,19 +280,12 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Find Me Online</h2>
           </div>
-          <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <UButton
-              v-for="(link, idx) in profileLinks"
-              :key="link.label"
-              as="a"
-              :href="link.href"
-              target="_blank"
-              rel="noreferrer"
-              :color="accentTones[idx % accentTones.length]"
-              variant="soft"
-              class="justify-center py-8 font-semibold">
-              {{ link.label }}
-            </UButton>
+          <div class="flex gap-8 justify-center">
+            <a v-for="link in profileLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="opacity-70 transition-opacity duration-200 hover:opacity-100">
+              <UTooltip :text="link.label" :delay-duration="0" arrow :content="{ side: 'bottom' }">
+                <UIcon :name="link.icon" class="size-8" />
+              </UTooltip>
+            </a>
           </div>
         </section>
 
