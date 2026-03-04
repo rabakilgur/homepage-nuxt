@@ -29,20 +29,7 @@ const focusAreas: FocusArea[] = [
   { title: "Design", details: ["Modern Web Design", "Adobe Creative Cloud"] },
 ];
 
-const technologies = [
-  "TypeScript",
-  "Vue",
-  "Nuxt",
-  "React",
-  "Node.js",
-  "Deno",
-  "Ruby on Rails",
-  "PostgreSQL",
-  "Docker",
-  "Python",
-  "Electron",
-  "AWS",
-];
+const technologies = ["TypeScript", "Vue", "Nuxt", "React", "Node.js", "Deno", "Ruby on Rails", "PostgreSQL", "Docker", "Python", "Electron", "AWS"];
 
 const timeline: TimelineItem[] = [
   {
@@ -86,17 +73,15 @@ const timeline: TimelineItem[] = [
 const projects: Project[] = [
   {
     title: "FabApp",
-    subtitle: "Electron App fur R&D, Fertigung und Cloud Engineering",
-    description:
-      "Vielseitige Desktop-Anwendung fur Forschung, Fertigung, Support und Cloud-Engineering mit AWS-API-Integration und Hardware-Schnittstellen.",
+    subtitle: "Electron App für R&D, Fertigung und Cloud Engineering",
+    description: "Vielseitige Desktop-Anwendung für Forschung, Fertigung, Support und Cloud-Engineering mit AWS-API-Integration und Hardware-Schnittstellen.",
     tags: ["Electron", "Vue", "Node.js", "AWS"],
     imageSrc: "/proj/proj_FabApp.jpg",
   },
   {
     title: "Apojet App",
     subtitle: "React Native Android App",
-    description:
-      "Weiterentwicklung der bestehenden Apojet App und Entwicklung einer neuen Android App mit React Native.",
+    description: "Weiterentwicklung der bestehenden Apojet App und Entwicklung einer neuen Android App mit React Native.",
     tags: ["React Native", "Android", "App"],
     imageSrc: "/proj/proj_ApojetAndroidApp.png",
     link: "https://play.google.com/store/apps/details?id=de.cida.mobile.apojet",
@@ -104,8 +89,7 @@ const projects: Project[] = [
   {
     title: "Spargelhof Monich Website",
     subtitle: "Website mit individueller CMS-Losung",
-    description:
-      "Entwicklung einer Webseite mit individueller CMS-Losung, Verkaufsstellen-Finder und OpenStreetMap-Integration.",
+    description: "Entwicklung einer Webseite mit individueller CMS-Losung, Verkaufsstellen-Finder und OpenStreetMap-Integration.",
     tags: ["Frontend", "Bootstrap", "PHP"],
     imageSrc: "/proj/proj_MoenichWebsite.jpg",
     link: "http://www.spargelhof-moenich.de/",
@@ -127,70 +111,103 @@ const contactLinks = [
 
 const currentYear = new Date().getFullYear();
 
+const navItems = [
+  { label: "About", href: "#about" },
+  { label: "Focus", href: "#focus" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
+];
+
+const quickStats = [
+  { label: "Experience", value: "10+ Years" },
+  { label: "Core Domains", value: "Cloud + Fullstack" },
+  { label: "Current Role", value: "Senior Cloud & Software Architect" },
+];
+
 const toneByType: Record<TimelineItem["type"], "primary" | "warning" | "neutral"> = {
   highlight: "primary",
   education: "warning",
   job: "neutral",
 };
 
-const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | "neutral"> = [
-  "primary",
-  "success",
-  "info",
-  "warning",
-  "error",
-  "neutral",
-];
+const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | "neutral"> = ["primary", "success", "info", "warning", "error", "neutral"];
 </script>
 
 <template>
-  <div class="min-h-screen from-sky-50 to-white bg-linear-to-b via-indigo-50/40 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900">
-    <div class="fixed top-4 right-4 z-50">
-      <UColorModeButton color="primary" variant="soft" />
-    </div>
+  <div class="min-h-screen from-sky-50 to-white bg-linear-to-b via-indigo-50/40 dark:from-gray-950 dark:via-gray-950 dark:to-gray-900">
+    <header class="sticky top-0 z-50 border-b backdrop-blur-xl border-default/70 bg-default/70">
+      <UContainer class="py-3">
+        <div class="flex gap-3 justify-between items-center">
+          <div class="flex gap-3 items-center">
+            <UAvatar alt="Robin Uhl" text="RU" color="primary" size="sm" />
+            <div class="flex flex-col">
+              <span class="text-sm font-semibold text-highlighted">Robin Uhl</span>
+              <span class="text-xs text-muted">Senior Cloud & Software Architect</span>
+            </div>
+          </div>
 
-    <section class="border-b border-default bg-linear-to-r from-primary/10 via-info/10 to-success/10">
-      <UContainer class="py-20 sm:py-24">
-        <div class="mx-auto max-w-4xl text-center">
-          <UBadge color="primary" variant="solid" class="mb-4">Portfolio</UBadge>
-          <h1 class="text-4xl font-bold tracking-tight text-highlighted sm:text-5xl md:text-6xl">
-            Hallo, ich bin Robin Uhl
-          </h1>
-          <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-muted">
-            Softwareingenieur und -architekt aus Darmstadt mit Fokus auf Cloud- und Fullstack-Entwicklung.
-            Ich baue robuste Produkte mit klarer UX, solider Architektur und hoher Delivery-Geschwindigkeit.
-          </p>
-          <div class="flex flex-wrap gap-3 justify-center items-center mt-8">
-            <UButton as="a" href="#projects" color="primary" variant="solid">Projekte ansehen</UButton>
-            <UButton as="a" href="#contact" variant="solid" color="info">Kontakt</UButton>
+          <nav class="hidden gap-1 items-center md:flex">
+            <UButton v-for="item in navItems" :key="item.href" :href="item.href" as="a" color="neutral" variant="ghost" size="sm">
+              {{ item.label }}
+            </UButton>
+          </nav>
+
+          <div class="flex gap-2 items-center">
+            <UColorModeButton color="primary" variant="soft" />
+            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm">Contact Info</UButton>
           </div>
         </div>
       </UContainer>
-    </section>
+    </header>
 
     <main>
+      <section class="overflow-hidden relative border-b border-default">
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-primary/20" />
+          <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-info/20" />
+          <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-success/20" />
+        </div>
+        <UContainer class="relative py-20 sm:py-24">
+          <div class="mx-auto max-w-5xl text-center">
+            <UBadge color="primary" variant="soft" size="lg" class="mb-5"> Senior Cloud & Software Architect </UBadge>
+            <h1 class="text-4xl font-bold tracking-tight text-balance text-highlighted sm:text-6xl">Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.</h1>
+            <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-toned">
+              Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Losungen mit Fokus auf saubere Architektur, stabile Systeme und nachhaltige Weiterentwicklung.
+            </p>
+            <div class="flex flex-wrap gap-3 justify-center items-center mt-9">
+              <UButton as="a" href="#projects" color="primary" variant="solid" size="lg"> Projekte ansehen </UButton>
+              <UButton as="a" href="#focus" color="info" variant="soft" size="lg"> Technischer Fokus </UButton>
+            </div>
+          </div>
+          <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
+            <UCard v-for="item in quickStats" :key="item.label" variant="subtle">
+              <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ item.label }}</p>
+              <p class="mt-2 text-xl font-semibold text-highlighted">{{ item.value }}</p>
+            </UCard>
+          </div>
+        </UContainer>
+      </section>
+
       <UContainer class="py-14 space-y-20 sm:py-16">
         <section id="about" class="space-y-5 text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Uber mich</h2>
-          <p class="mx-auto max-w-3xl leading-8 text-toned">
-            Ich arbeite aktuell bei FlexHome.Energy an einer Plattform fur nachhaltigere Energieversorgung.
-            Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem Backend und Cloud-Betrieb.
-          </p>
+          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
+          <UCard variant="soft" class="mx-auto max-w-4xl">
+            <p class="mx-auto max-w-3xl leading-8 text-toned">
+              Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
+              Backend und Cloud-Betrieb.
+            </p>
+          </UCard>
         </section>
 
         <USeparator />
 
         <section id="focus" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Schwerpunkte</h2>
+            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Focus Areas</h2>
           </div>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <UCard
-              v-for="(area, idx) in focusAreas"
-              :key="area.title"
-              variant="soft"
-              class="border-t-4 border-t-primary-500/70"
-            >
+            <UCard v-for="(area, idx) in focusAreas" :key="area.title" variant="soft" class="border-t-4 border-t-primary-500/70">
               <template #header>
                 <h3 class="font-semibold text-highlighted">
                   <UBadge :color="accentTones[idx % accentTones.length]" variant="soft">{{ area.title }}</UBadge>
@@ -202,13 +219,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </UCard>
           </div>
           <div class="flex flex-wrap gap-2 justify-center">
-            <UBadge
-              v-for="(tech, idx) in technologies"
-              :key="tech"
-              :color="accentTones[idx % accentTones.length]"
-              variant="subtle"
-              size="md"
-            >
+            <UBadge v-for="(tech, idx) in technologies" :key="tech" :color="accentTones[idx % accentTones.length]" variant="subtle" size="md">
               {{ tech }}
             </UBadge>
           </div>
@@ -218,7 +229,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
         <section id="experience" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Erfahrung</h2>
+            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Experience</h2>
           </div>
           <div class="grid gap-4">
             <UCard v-for="item in timeline" :key="`${item.title}-${item.info}`" variant="soft" class="border-l-4 border-l-primary-500/50">
@@ -242,49 +253,24 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
         <section id="projects" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Projekte</h2>
+            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Selected Projects</h2>
           </div>
-          <div class="grid gap-5 lg:grid-cols-3">
-            <UCard
-              v-for="(project, idx) in projects"
-              :key="project.title"
-              class="overflow-hidden"
-              variant="soft"
-            >
-              <NuxtImg
-                :src="project.imageSrc"
-                :alt="project.title"
-                class="object-cover w-full h-48 rounded-lg"
-                loading="lazy"
-              />
+          <div class="grid gap-5 lg:grid-cols-2">
+            <UCard v-for="(project, idx) in projects" :key="project.title" class="overflow-hidden" variant="soft">
+              <NuxtImg :src="project.imageSrc" :alt="project.title" class="object-cover w-full h-48 rounded-lg" loading="lazy" />
               <div class="mt-5">
-                <p class="text-xs font-semibold uppercase tracking-wide text-muted">
+                <p class="text-xs font-semibold tracking-wide uppercase text-muted">
                   {{ project.subtitle }}
                 </p>
                 <h3 class="mt-1 text-xl font-semibold text-highlighted">{{ project.title }}</h3>
                 <p class="mt-3 text-sm leading-7 text-toned">{{ project.description }}</p>
                 <div class="flex flex-wrap gap-2 mt-4">
-                  <UBadge
-                    v-for="tag in project.tags"
-                    :key="`${project.title}-${tag}`"
-                    :color="accentTones[idx % accentTones.length]"
-                    variant="subtle"
-                    size="sm"
-                  >
+                  <UBadge v-for="tag in project.tags" :key="`${project.title}-${tag}`" :color="accentTones[idx % accentTones.length]" variant="subtle" size="sm">
                     {{ tag }}
                   </UBadge>
                 </div>
-                <UButton
-                  v-if="project.link"
-                  as="a"
-                  :href="project.link"
-                  target="_blank"
-                  rel="noreferrer"
-                  :color="accentTones[idx % accentTones.length]"
-                  variant="solid"
-                  class="mt-4"
-                >
-                  Projekt ansehen
+                <UButton v-if="project.link" as="a" :href="project.link" target="_blank" rel="noreferrer" :color="accentTones[idx % accentTones.length]" variant="solid" class="mt-4">
+                  Open Project
                 </UButton>
               </div>
             </UCard>
@@ -295,7 +281,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
         <section id="links" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Links</h2>
+            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Find Me Online</h2>
           </div>
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <UButton
@@ -307,8 +293,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               rel="noreferrer"
               :color="accentTones[idx % accentTones.length]"
               variant="soft"
-              class="justify-center py-8 font-semibold"
-            >
+              class="justify-center py-8 font-semibold">
               {{ link.label }}
             </UButton>
           </div>
@@ -318,25 +303,16 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
         <section id="contact" class="space-y-8">
           <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Kontakt</h2>
+            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Contact</h2>
           </div>
           <div class="grid gap-4 mx-auto max-w-3xl">
             <UCard v-for="(entry, idx) in contactLinks" :key="entry.label" variant="soft">
               <div class="flex flex-wrap gap-3 justify-between items-center">
                 <div>
-                  <p class="text-xs font-semibold uppercase tracking-wide text-muted">{{ entry.label }}</p>
+                  <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
                   <p class="mt-1 text-lg font-semibold text-highlighted">{{ entry.value }}</p>
                 </div>
-                <UButton
-                  as="a"
-                  :href="entry.href"
-                  target="_blank"
-                  rel="noreferrer"
-                  :color="accentTones[idx % accentTones.length]"
-                  variant="solid"
-                >
-                  Offnen
-                </UButton>
+                <UButton as="a" :href="entry.href" target="_blank" rel="noreferrer" :color="accentTones[idx % accentTones.length]" variant="solid"> Open </UButton>
               </div>
             </UCard>
           </div>
@@ -344,10 +320,15 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
       </UContainer>
     </main>
 
-    <footer class="border-t border-default py-8">
-      <UContainer class="text-center text-sm text-muted">
+    <footer class="py-10 border-t border-default">
+      <UContainer class="text-sm text-center text-muted">
         <p>Copyright {{ currentYear }}</p>
-        <p class="mt-1">Made with heart by Robin Uhl</p>
+        <p class="mt-1">Made with ❤️ by Robin Uhl</p>
+        <div class="flex gap-2 justify-center items-center mt-4">
+          <UButton as="a" href="#about" variant="ghost" color="neutral" size="sm">About</UButton>
+          <UButton as="a" href="#projects" variant="ghost" color="neutral" size="sm">Projects</UButton>
+          <UButton as="a" href="#contact" variant="ghost" color="neutral" size="sm">Contact</UButton>
+        </div>
       </UContainer>
     </footer>
   </div>
