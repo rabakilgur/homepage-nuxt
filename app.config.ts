@@ -3,7 +3,7 @@ export default defineAppConfig({
     colors: {
       // Semantic Colors
       primary: "sky",
-      neutral: "gray",
+      neutral: "zinc",
       // Common Colors (all Tailwind colors)
       red: "red",
       orange: "orange",

@@ -1,12 +1,6 @@
 <script setup lang="ts">
-type Color =
-  | "primary"
-  | "secondary"
-  | "success"
-  | "info"
-  | "warning"
-  | "error"
-  | "neutral"
+type SemanticColor = "primary" | "secondary" | "success" | "info" | "warning" | "error" | "neutral";
+type CommonColor =
   | "red"
   | "orange"
   | "amber"
@@ -28,6 +22,7 @@ type Color =
   | "gray"
   | "zinc"
   | "stone";
+type Color = SemanticColor | CommonColor;
 
 type FocusArea = {
   title: string;
@@ -36,32 +31,36 @@ type FocusArea = {
 
 const focusAreas: FocusArea[] = [
   { title: "Frontend", details: ["React, Next.js, Preact", "Vue, Nuxt", "UI Systems"] },
-  { title: "Backend", details: ["Node.js, Deno", "Ruby on Rails", "API Design"] },
-  { title: "Cloud & DevOps", details: ["AWS", "Docker", "CI/CD"] },
+  { title: "Backend", details: ["Node.js, Deno, Bun", "Ruby on Rails", "API Design"] },
+  { title: "Cloud & DevOps", details: ["AWS", "K8s, Docker", "CI/CD"] },
   { title: "Mobile", details: ["React Native", "Native Android", "Hybrid Apps"] },
-  { title: "Data", details: ["PostgreSQL", "MySQL", "S3 Buckets"] },
-  { title: "Design", details: ["Modern Web Design", "Adobe Creative Cloud"] },
+  { title: "Data", details: ["PostgreSQL, MySQL", "InfluxDB, S3", "AI"] },
+  { title: "Architecture", details: ["Cloud-Native, Containerization", "Event-Driven, API-First", "High-Availability, Scalability"] },
 ];
 
 type Technology = {
   name: string;
-  color: Color;
+  color: CommonColor;
   icon: string;
 };
 
 const technologies: Technology[] = [
   { name: "TypeScript", color: "blue", icon: "i-mdi-language-typescript" },
+  { name: "JavaScript", color: "yellow", icon: "i-mdi-language-javascript" },
   { name: "Vue", color: "green", icon: "i-mdi-vuejs" },
-  { name: "Nuxt", color: "purple", icon: "i-mdi-nuxt" },
-  { name: "React", color: "blue", icon: "i-mdi-react" },
-  { name: "Node.js", color: "green", icon: "i-mdi-nodejs" },
-  { name: "Deno", color: "blue", icon: "i-bxl-deno" },
+  { name: "Nuxt", color: "green", icon: "i-mdi-nuxt" },
+  { name: "React", color: "sky", icon: "i-mdi-react" },
+  { name: "Node.js", color: "lime", icon: "i-mdi-nodejs" },
+  { name: "Deno", color: "zinc", icon: "i-bxl-deno" },
+  { name: "Bun", color: "zinc", icon: "i-bxl-bun" },
   { name: "Ruby on Rails", color: "red", icon: "i-mdi-language-ruby-on-rails" },
-  { name: "PostgreSQL", color: "blue", icon: "i-bxl-postgresql" },
+  { name: "PostgreSQL", color: "sky", icon: "i-bxl-postgresql" },
   { name: "Docker", color: "blue", icon: "i-mdi-docker" },
   { name: "Python", color: "yellow", icon: "i-mdi-language-python" },
   { name: "Electron", color: "blue", icon: "i-mdi-electron-framework" },
-  { name: "AWS", color: "blue", icon: "i-mdi-aws" },
+  { name: "AWS", color: "orange", icon: "i-mdi-aws" },
+  { name: "K8s", color: "blue", icon: "i-mdi-kubernetes" },
+  { name: "RKE2", color: "blue", icon: "i-mdi-tractor" },
 ];
 
 type TimelineItem = {
@@ -74,38 +73,44 @@ type TimelineItem = {
 const timeline: TimelineItem[] = [
   {
     title: "FlexHome.Energy",
-    info: "Okt 2024 - heute",
-    text: "Senior Cloud and Software Architect.",
+    info: "Okt 2024 – heute",
+    text: "Senior Cloud and Software Architect",
     type: "highlight",
   },
   {
     title: "Solarnative",
-    info: "Feb 2024 - Sep 2024",
-    text: "Senior DevOps, Cloud and Software Engineer.",
+    info: "Feb 2024 – Sep 2024",
+    text: "Senior Cloud and Software Engineer",
     type: "job",
   },
   {
     title: "ARZ Darmstadt",
-    info: "Apr 2022 - Jan 2024",
-    text: "Softwareingenieur im Bereich Management Information Systems.",
+    info: "Apr 2022 – Jan 2024",
+    text: "Softwareingenieur im Bereich Management Information Systems",
     type: "job",
   },
   {
     title: "TU Darmstadt (Master)",
-    info: "Apr 2022 - heute",
-    text: "Informatik Master-Studium.",
+    info: "Apr 2022 – heute",
+    text: "Master of Science Informatik",
     type: "education",
   },
   {
     title: "ARZ Darmstadt",
-    info: "Mar 2020 - Mar 2022",
-    text: "Entwickler im Bereich MIS als Werkstudent.",
+    info: "Mar 2020 – Mar 2022",
+    text: "Entwickler im Bereich MIS als Werkstudent",
+    type: "job",
+  },
+  {
+    title: "EKHN",
+    info: "Nov 2015 – Mar 2019",
+    text: "Entwickler als Werksstudent",
     type: "job",
   },
   {
     title: "TU Darmstadt (Bachelor)",
-    info: "Okt 2015 - Mar 2022",
-    text: "Bachelor of Science Informatik.",
+    info: "Okt 2015 – Mar 2022",
+    text: "Bachelor of Science Informatik",
     type: "education",
   },
 ];
@@ -117,7 +122,7 @@ type Project = {
   tags: string[];
   imageSrc: string;
   link?: string;
-  accentColor: Color;
+  accentColor: CommonColor;
 };
 
 const projects: Project[] = [
@@ -125,7 +130,7 @@ const projects: Project[] = [
     title: "FabApp",
     subtitle: "App für R&D, Fertigung und Cloud Engineering",
     description: "Vielseitige Desktop-Anwendung für Forschung, Fertigung, Support und Cloud-Engineering mit AWS-API-Integration und Hardware-Schnittstellen.",
-    tags: ["Electron", "Vue", "Node.js", "AWS"],
+    tags: ["Electron", "Vue", "Nuxt", "Node", "AWS"],
     imageSrc: "/proj/proj_FabApp.jpg",
     accentColor: "violet",
   },
@@ -139,22 +144,22 @@ const projects: Project[] = [
     accentColor: "orange",
   },
   {
-    title: "Spargelhof Monich Website",
-    subtitle: "Webseite mit individueller CMS-Losung",
-    description: "Entwicklung einer Webseite mit individueller CMS-Losung, Verkaufsstellen-Finder und OpenStreetMap-Integration.",
-    tags: ["CMS", "Bootstrap", "PHP"],
+    title: "Spargelhof Mönich Webseite",
+    subtitle: "Webseite mit individueller CMS-Lösung",
+    description: "Entwicklung einer Webseite mit individueller CMS-Lösung, Verkaufsstellen-Finder und OpenStreetMap-Integration.",
+    tags: ["CMS", "Bootstrap", "PHP", "OpenStreetMap"],
     imageSrc: "/proj/proj_MoenichWebsite.jpg",
     link: "http://www.spargelhof-moenich.de/",
-    accentColor: "amber",
+    accentColor: "yellow",
   },
   {
     title: "Thor Robot GUI",
     subtitle: "Benutzeroberflache zur Steuerung des Thor-Roboters",
     description: "Electron-App zur prazisen Steuerung eines Open-Source-6-Achsen-Roboters in Zusammenarbeit mit dem FabLab Darmstadt.",
-    tags: ["Node.js", "Electron", "Robotik"],
+    tags: ["Node", "Electron", "Robotik"],
     imageSrc: "/proj/proj_RobotControlGUI.jpg",
     link: "https://github.com/rabakilgur/ThorRobotGUI",
-    accentColor: "orange",
+    accentColor: "amber",
   },
   {
     title: "Dice Project App",
@@ -169,10 +174,10 @@ const projects: Project[] = [
     title: "OPC Factory Control Panel",
     subtitle: "Programm zur Steuerung von Maschinen via OPC-UA",
     description: "Im Rahmen eines Bachelorpraktikums entwickelte Anwendung zum dynamischen Senden von Auftragen an industrielle Maschinen mit erweiterbarer Architektur.",
-    tags: ["Node.js", "Electron", "OPC-UA"],
+    tags: ["Node", "Electron", "OPC-UA"],
     imageSrc: "/proj/proj_OPCFactoryControlPanel.jpg",
     link: "https://github.com/rabakilgur/OPC_Factory_Control_Panel",
-    accentColor: "neutral",
+    accentColor: "stone",
   },
 ];
 
@@ -205,17 +210,18 @@ const quickStats = [
   { label: "Current Role", value: "Senior Cloud & Software Architect" },
 ];
 
-const toneByType: Record<TimelineItem["type"], "primary" | "warning" | "neutral"> = {
-  highlight: "primary",
-  education: "warning",
-  job: "neutral",
-};
-
 const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | "neutral"> = ["primary", "success", "info", "warning", "error", "neutral"];
+
+function shuffleArray<T>(array: T[]): T[] {
+  return array
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+}
 </script>
 
 <template>
-  <div class="min-h-screen from-sky-50 to-white bg-linear-to-b via-indigo-50/40 dark:from-gray-950 dark:via-gray-950 dark:to-gray-900">
+  <div class="min-h-screen dark:bg-neutral-950/75">
     <header class="sticky top-0 z-50 border-b backdrop-blur-xl border-default/70 bg-default/70">
       <UContainer class="py-3">
         <div class="flex gap-3 justify-between items-center">
@@ -244,14 +250,14 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     <main>
       <section class="overflow-hidden relative border-b border-default">
         <div class="absolute inset-0 pointer-events-none">
-          <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-primary/20" />
-          <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-info/20" />
-          <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-success/20" />
+          <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
+          <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-cyan/20" />
+          <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-blue/20" />
         </div>
         <UContainer class="relative py-20 sm:py-24">
           <div class="mx-auto max-w-5xl text-center">
             <UBadge color="primary" variant="soft" size="lg" class="mb-5"> Senior Cloud & Software Architect </UBadge>
-            <h1 class="text-4xl font-bold tracking-tight text-balance text-highlighted sm:text-6xl">Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.</h1>
+            <h1 class="text-4xl font-bold tracking-tight leading-18 text-balance text-highlighted sm:text-6xl">Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.</h1>
             <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-toned">
               Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Losungen mit Fokus auf saubere Architektur, stabile Systeme und nachhaltige Weiterentwicklung.
             </p>
@@ -266,8 +272,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
         </UContainer>
       </section>
 
-      <UContainer class="py-14 space-y-20 sm:py-16">
-        <section id="about" class="space-y-5 text-center">
+      <!-- <section id="about" class="space-y-5 text-center">
           <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
           <UCard variant="soft" class="mx-auto max-w-4xl">
             <p class="mx-auto max-w-3xl leading-8 text-toned">
@@ -277,29 +282,38 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </UCard>
         </section>
 
-        <USeparator />
+        <USeparator /> -->
 
+      <section id="about" class="space-y-5 text-center bg-neutral-900">
+        <UContainer class="py-14 space-y-12 sm:py-20">
+          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
+          <p class="mx-auto max-w-3xl leading-8 text-toned">
+            Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
+            Backend und Cloud-Betrieb. Darüber hinaus arbeite ich auch an Projekten in den Bereichen KI, App-Entwicklung und Design.
+          </p>
+        </UContainer>
+      </section>
+
+      <UContainer class="py-14 space-y-20 max-w-5xl sm:py-16">
         <section id="focus" class="space-y-8">
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Focus Areas</h2>
           </div>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <UPageCard v-for="(area, idx) in focusAreas" :key="area.title" spotlight spotlight-color="primary">
-              <template #header>
-                <h3 class="font-semibold text-highlighted">
-                  <UBadge :color="accentTones[idx % accentTones.length]" variant="soft">{{ area.title }}</UBadge>
-                </h3>
-              </template>
+            <UPageCard v-for="(area, index) in focusAreas" :key="area.title" spotlight spotlight-color="neutral">
+              <h3>
+                <UBadge :color="accentTones[index % accentTones.length]" variant="soft" size="lg" class="mb-1">{{ area.title }}</UBadge>
+              </h3>
               <ul class="space-y-2 text-sm text-toned">
                 <li v-for="detail in area.details" :key="detail">{{ detail }}</li>
               </ul>
             </UPageCard>
           </div>
-          <div class="flex flex-wrap gap-2 justify-center">
-            <UBadge v-for="tech in technologies" :key="tech.name" :color="tech.color" variant="subtle" size="lg" :icon="tech.icon">
+          <UMarquee :overlay="false" :ui="{ root: '[--gap:--spacing(3)] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]' }">
+            <UBadge v-for="tech in shuffleArray(technologies)" :key="tech.name" :color="tech.color" variant="subtle" size="lg" :icon="tech.icon">
               {{ tech.name }}
             </UBadge>
-          </div>
+          </UMarquee>
         </section>
 
         <USeparator />
@@ -309,18 +323,14 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Experience</h2>
           </div>
           <div class="grid gap-4">
-            <UCard v-for="item in timeline" :key="`${item.title}-${item.info}`" variant="soft" class="border-l-4 border-l-primary-500/50">
-              <div class="flex flex-wrap gap-3 justify-between items-start">
+            <UCard v-for="item in timeline" :key="`${item.title}-${item.info}`" variant="subtle" class="relative pr-4 pl-2 bg-transparent" :class="{ 'bg-neutral-500/15': item.type === 'highlight' }">
+              <div class="flex flex-wrap gap-3 justify-between items-center">
                 <div>
                   <h3 class="text-xl font-semibold text-highlighted">{{ item.title }}</h3>
-                  <p class="mt-2 text-toned">{{ item.text }}</p>
+                  <p class="mt-2 text-muted">{{ item.text }}</p>
                 </div>
-                <div class="flex gap-2 items-center">
-                  <UBadge :color="toneByType[item.type]" variant="subtle">
-                    {{ item.type === "education" ? "Education" : item.type === "highlight" ? "Current" : "Job" }}
-                  </UBadge>
-                  <UBadge color="neutral" variant="outline">{{ item.info }}</UBadge>
-                </div>
+                <span class="text-muted">{{ item.info }}</span>
+                <UIcon v-if="item.type === 'education'" name="i-mdi-university" class="absolute -right-2 -top-4 rotate-14 text-neutral-500/7 size-40" />
               </div>
             </UCard>
           </div>
@@ -332,15 +342,37 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Selected Projects</h2>
           </div>
-          <div class="grid gap-5 lg:grid-cols-2">
-            <UPageCard v-for="(project, idx) in projects" :key="project.title" spotlight :spotlight-color="project.accentColor" class="spotlight-card">
-              <NuxtImg :src="project.imageSrc" :alt="project.title" class="object-cover w-full h-48 rounded-lg" loading="lazy" />
-              <div class="mt-5">
-                <p class="text-xs font-semibold tracking-wide uppercase text-muted">
+          <div class="grid gap-5">
+            <UPageCard
+              v-for="(project, index) in projects"
+              :key="project.title"
+              spotlight
+              :spotlight-color="project.accentColor"
+              class="p-0 transition-all duration-300 spotlightcard group hover:-translate-y-1"
+              :ui="{
+                container: `overflow-hidden rounded-lg p-0! flex! flex-row! gap-0! ${index % 2 === 1 ? 'flex-row-reverse!' : ''}`,
+              }">
+              <div
+                class="absolute inset-0 opacity-4"
+                :style="`background: linear-gradient(to ${index % 2 === 0 ? 'right' : 'left'}, transparent 60%, var(--ui-color-${project.accentColor}-500));`"></div>
+              <div class="absolute inset-0 mix-blend-multiply opacity-4 dark:opacity-25 bg-noise"></div>
+              <div
+                class="hidden overflow-hidden relative w-80 shrink-0 grow-0 md:block"
+                :class="{
+                  '[clip-path:polygon(0%_0%,99%_0%,89%_100%,0%_100%)]': index % 2 === 0,
+                  '[clip-path:polygon(11%_0%,100%_0%,100%_100%,1%_100%)]': index % 2 === 1,
+                }">
+                <div :style="`background-image: url(${project.imageSrc})`" class="w-full h-full bg-center bg-cover transition-all duration-300 group-hover:rotate-1 group-hover:scale-103" />
+              </div>
+              <div class="relative px-8 my-5" :class="{ 'md:pl-6': index % 2 === 0 }">
+                <h3 class="mb-1 text-xl font-semibold text-highlighted">{{ project.title }}</h3>
+                <p class="font-semibold tracking-wide text-toned">
                   {{ project.subtitle }}
                 </p>
-                <h3 class="mt-1 text-xl font-semibold text-highlighted">{{ project.title }}</h3>
-                <p class="mt-3 text-sm leading-7 text-toned">{{ project.description }}</p>
+                <div
+                  class="mt-3.5 mb-2.5 w-14 h-[0.3rem] opacity-40 group-hover:opacity-60 rounded-full transition-all duration-300 group-hover:w-18"
+                  :style="`background-color: var(--ui-color-${project.accentColor}-500)`"></div>
+                <p class="text-sm leading-7 text-toned">{{ project.description }}</p>
                 <div class="flex flex-wrap gap-2 mt-4">
                   <UBadge v-for="tag in project.tags" :key="`${project.title}-${tag}`" variant="subtle" size="sm" :color="project.accentColor">
                     {{ tag }}
@@ -356,7 +388,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
                   variant="subtle"
                   size="sm"
                   icon="i-mdi-open-in-new"
-                  class="absolute right-3 bottom-3 mt-4 sm:right-5 sm:bottom-5">
+                  class="absolute -bottom-1 right-4">
                   Open Project
                 </UButton>
               </div>
@@ -399,7 +431,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     <footer class="py-10 border-t border-default">
       <UContainer class="text-sm text-center text-muted">
         <p>Copyright {{ currentYear }}</p>
-        <p class="mt-1">Made with ❤️ by Robin Uhl</p>
+        <p class="mt-1">Made with ♥ by Robin Uhl</p>
         <div class="flex gap-2 justify-center items-center mt-4">
           <UButton as="a" href="#about" variant="ghost" color="neutral" size="sm">About</UButton>
           <UButton as="a" href="#projects" variant="ghost" color="neutral" size="sm">Projects</UButton>
@@ -416,7 +448,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 //   inherits: true;
 //   syntax: "<color>";
 // }
-.spotlight-card {
+.spotlightcard {
   &:not(:hover)::before {
     opacity: 0;
   }
