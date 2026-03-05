@@ -1,23 +1,37 @@
 <script setup lang="ts">
+type Color =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "info"
+  | "warning"
+  | "error"
+  | "neutral"
+  | "red"
+  | "orange"
+  | "amber"
+  | "yellow"
+  | "lime"
+  | "green"
+  | "emerald"
+  | "teal"
+  | "cyan"
+  | "sky"
+  | "blue"
+  | "indigo"
+  | "violet"
+  | "purple"
+  | "fuchsia"
+  | "pink"
+  | "rose"
+  | "slate"
+  | "gray"
+  | "zinc"
+  | "stone";
+
 type FocusArea = {
   title: string;
   details: string[];
-};
-
-type TimelineItem = {
-  title: string;
-  info: string;
-  text: string;
-  type: "job" | "education" | "highlight";
-};
-
-type Project = {
-  title: string;
-  subtitle: string;
-  description: string;
-  tags: string[];
-  imageSrc: string;
-  link?: string;
 };
 
 const focusAreas: FocusArea[] = [
@@ -29,7 +43,33 @@ const focusAreas: FocusArea[] = [
   { title: "Design", details: ["Modern Web Design", "Adobe Creative Cloud"] },
 ];
 
-const technologies = ["TypeScript", "Vue", "Nuxt", "React", "Node.js", "Deno", "Ruby on Rails", "PostgreSQL", "Docker", "Python", "Electron", "AWS"];
+type Technology = {
+  name: string;
+  color: Color;
+  icon: string;
+};
+
+const technologies: Technology[] = [
+  { name: "TypeScript", color: "blue", icon: "i-mdi-language-typescript" },
+  { name: "Vue", color: "green", icon: "i-mdi-vuejs" },
+  { name: "Nuxt", color: "purple", icon: "i-mdi-nuxt" },
+  { name: "React", color: "blue", icon: "i-mdi-react" },
+  { name: "Node.js", color: "green", icon: "i-mdi-nodejs" },
+  { name: "Deno", color: "blue", icon: "i-bxl-deno" },
+  { name: "Ruby on Rails", color: "red", icon: "i-mdi-language-ruby-on-rails" },
+  { name: "PostgreSQL", color: "blue", icon: "i-bxl-postgresql" },
+  { name: "Docker", color: "blue", icon: "i-mdi-docker" },
+  { name: "Python", color: "yellow", icon: "i-mdi-language-python" },
+  { name: "Electron", color: "blue", icon: "i-mdi-electron-framework" },
+  { name: "AWS", color: "blue", icon: "i-mdi-aws" },
+];
+
+type TimelineItem = {
+  title: string;
+  info: string;
+  text: string;
+  type: "job" | "education" | "highlight";
+};
 
 const timeline: TimelineItem[] = [
   {
@@ -70,29 +110,69 @@ const timeline: TimelineItem[] = [
   },
 ];
 
+type Project = {
+  title: string;
+  subtitle: string;
+  description: string;
+  tags: string[];
+  imageSrc: string;
+  link?: string;
+  accentColor: Color;
+};
+
 const projects: Project[] = [
   {
     title: "FabApp",
-    subtitle: "Electron App für R&D, Fertigung und Cloud Engineering",
+    subtitle: "App für R&D, Fertigung und Cloud Engineering",
     description: "Vielseitige Desktop-Anwendung für Forschung, Fertigung, Support und Cloud-Engineering mit AWS-API-Integration und Hardware-Schnittstellen.",
     tags: ["Electron", "Vue", "Node.js", "AWS"],
     imageSrc: "/proj/proj_FabApp.jpg",
+    accentColor: "violet",
   },
   {
     title: "Apojet App",
     subtitle: "React Native Android App",
-    description: "Weiterentwicklung der bestehenden Apojet App und Entwicklung einer neuen Android App mit React Native.",
+    description: "Weiterentwicklung der bestehenden Apojet App und Entwicklung einer vollständig neuen Android App mit React Native.",
     tags: ["React Native", "Android", "App"],
     imageSrc: "/proj/proj_ApojetAndroidApp.png",
     link: "https://play.google.com/store/apps/details?id=de.cida.mobile.apojet",
+    accentColor: "orange",
   },
   {
     title: "Spargelhof Monich Website",
-    subtitle: "Website mit individueller CMS-Losung",
+    subtitle: "Webseite mit individueller CMS-Losung",
     description: "Entwicklung einer Webseite mit individueller CMS-Losung, Verkaufsstellen-Finder und OpenStreetMap-Integration.",
-    tags: ["Frontend", "Bootstrap", "PHP"],
+    tags: ["CMS", "Bootstrap", "PHP"],
     imageSrc: "/proj/proj_MoenichWebsite.jpg",
     link: "http://www.spargelhof-moenich.de/",
+    accentColor: "amber",
+  },
+  {
+    title: "Thor Robot GUI",
+    subtitle: "Benutzeroberflache zur Steuerung des Thor-Roboters",
+    description: "Electron-App zur prazisen Steuerung eines Open-Source-6-Achsen-Roboters in Zusammenarbeit mit dem FabLab Darmstadt.",
+    tags: ["Node.js", "Electron", "Robotik"],
+    imageSrc: "/proj/proj_RobotControlGUI.jpg",
+    link: "https://github.com/rabakilgur/ThorRobotGUI",
+    accentColor: "orange",
+  },
+  {
+    title: "Dice Project App",
+    subtitle: "App für iOS, Android und Web",
+    description: "Cross-Plattform-Würfel-App als App-Development-Projekt mit Fokus auf mobile und webbasierte Nutzung.",
+    tags: ["PhoneGap", "Hybrid App", "Framework 7"],
+    imageSrc: "/proj/proj_DiceProjectApp.jpg",
+    link: "https://robin-garbe.de/p/dice_project",
+    accentColor: "blue",
+  },
+  {
+    title: "OPC Factory Control Panel",
+    subtitle: "Programm zur Steuerung von Maschinen via OPC-UA",
+    description: "Im Rahmen eines Bachelorpraktikums entwickelte Anwendung zum dynamischen Senden von Auftragen an industrielle Maschinen mit erweiterbarer Architektur.",
+    tags: ["Node.js", "Electron", "OPC-UA"],
+    imageSrc: "/proj/proj_OPCFactoryControlPanel.jpg",
+    link: "https://github.com/rabakilgur/OPC_Factory_Control_Panel",
+    accentColor: "neutral",
   },
 ];
 
@@ -216,8 +296,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </UPageCard>
           </div>
           <div class="flex flex-wrap gap-2 justify-center">
-            <UBadge v-for="(tech, idx) in technologies" :key="tech" :color="accentTones[idx % accentTones.length]" variant="subtle" size="md">
-              {{ tech }}
+            <UBadge v-for="tech in technologies" :key="tech.name" :color="tech.color" variant="subtle" size="lg" :icon="tech.icon">
+              {{ tech.name }}
             </UBadge>
           </div>
         </section>
@@ -253,7 +333,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Selected Projects</h2>
           </div>
           <div class="grid gap-5 lg:grid-cols-2">
-            <UPageCard v-for="(project, idx) in projects" :key="project.title" spotlight :spotlight-color="accentTones[idx % accentTones.length]">
+            <UPageCard v-for="(project, idx) in projects" :key="project.title" spotlight :spotlight-color="project.accentColor" class="spotlight-card">
               <NuxtImg :src="project.imageSrc" :alt="project.title" class="object-cover w-full h-48 rounded-lg" loading="lazy" />
               <div class="mt-5">
                 <p class="text-xs font-semibold tracking-wide uppercase text-muted">
@@ -262,11 +342,21 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
                 <h3 class="mt-1 text-xl font-semibold text-highlighted">{{ project.title }}</h3>
                 <p class="mt-3 text-sm leading-7 text-toned">{{ project.description }}</p>
                 <div class="flex flex-wrap gap-2 mt-4">
-                  <UBadge v-for="tag in project.tags" :key="`${project.title}-${tag}`" :color="accentTones[idx % accentTones.length]" variant="subtle" size="sm">
+                  <UBadge v-for="tag in project.tags" :key="`${project.title}-${tag}`" variant="subtle" size="sm" :color="project.accentColor">
                     {{ tag }}
                   </UBadge>
                 </div>
-                <UButton v-if="project.link" as="a" :href="project.link" target="_blank" rel="noreferrer" :color="accentTones[idx % accentTones.length]" variant="solid" class="mt-4">
+                <UButton
+                  v-if="project.link"
+                  as="a"
+                  :href="project.link"
+                  target="_blank"
+                  rel="noreferrer"
+                  :color="project.accentColor"
+                  variant="subtle"
+                  size="sm"
+                  icon="i-mdi-open-in-new"
+                  class="absolute right-3 bottom-3 mt-4 sm:right-5 sm:bottom-5">
                   Open Project
                 </UButton>
               </div>
@@ -274,9 +364,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </div>
         </section>
 
-        <USeparator />
-
-        <section id="links" class="space-y-8">
+        <section id="links" class="py-14 space-y-8 rounded-lg bg-neutral-900">
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Find Me Online</h2>
           </div>
@@ -288,8 +376,6 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </a>
           </div>
         </section>
-
-        <USeparator />
 
         <section id="contact" class="space-y-8">
           <div class="text-center">
@@ -323,3 +409,19 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     </footer>
   </div>
 </template>
+
+<style lang="scss">
+// @property --spotlight-color {
+//   initial-value: var(--ui-primary);
+//   inherits: true;
+//   syntax: "<color>";
+// }
+.spotlight-card {
+  &:not(:hover)::before {
+    opacity: 0;
+  }
+  &::before {
+    transition: opacity 0.5s ease-in-out;
+  }
+}
+</style>

@@ -1,10 +1,46 @@
-import tailwindcss from "@tailwindcss/vite";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/image", "@nuxt/ui"],
   css: ["~/assets/css/tailwind.css", "~/assets/scss/main.scss"],
+
+  ui: {
+    theme: {
+      colors: [
+        // Semantic Colors
+        "primary",
+        "secondary",
+        "success",
+        "info",
+        "warning",
+        "error",
+        "neutral",
+        // Common Colors (all Tailwind colors)
+        "red",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "green",
+        "emerald",
+        "teal",
+        "cyan",
+        "sky",
+        "blue",
+        "indigo",
+        "violet",
+        "purple",
+        "fuchsia",
+        "pink",
+        "rose",
+        "slate",
+        "gray",
+        "zinc",
+        "neutral",
+        "stone",
+      ],
+    },
+  },
 
   app: {
     head: {
@@ -46,7 +82,8 @@ export default defineNuxtConfig({
         },
         {
           name: "keywords",
-          content: "Robin Uhl, Homepage, Portfolio, Web Development, Web Design, Web Development Agency, Web Design Agency, Web Development Company, Web Design Company, Web Development Services, Web Design Services, Web Development Tools, Web Design Tools, Web Development Technologies, Web Design Technologies, Web Development Frameworks, Web Design Frameworks, Web Development Libraries, Web Design Libraries, Web Development Platforms, Web Design Platforms, Web Development Tools, Web Design Tools, Web Development Technologies, Web Design Technologies, Web Development Frameworks, Web Design Frameworks, Web Development Libraries, Web Design Libraries, Web Development Platforms, Web Design Platforms",
+          content:
+            "Robin Uhl, Homepage, Portfolio, Web Development, Web Design, Web Development Agency, Web Design Agency, Web Development Company, Web Design Company, Web Development Services, Web Design Services, Web Development Tools, Web Design Tools, Web Development Technologies, Web Design Technologies, Web Development Frameworks, Web Design Frameworks, Web Development Libraries, Web Design Libraries, Web Development Platforms, Web Design Platforms, Web Development Tools, Web Design Tools, Web Development Technologies, Web Design Technologies, Web Development Frameworks, Web Design Frameworks, Web Development Libraries, Web Design Libraries, Web Development Platforms, Web Design Platforms",
         },
         {
           name: "author",
@@ -71,10 +108,10 @@ export default defineNuxtConfig({
   },
   routeRules: {
     // prerender index route by default
-    '/': { prerender: true },
+    "/": { prerender: true },
   },
   vite: {
-    plugins: [tailwindcss() as any],
+    plugins: [],
   },
   compatibilityDate: "2026-03-03",
 });
