@@ -50,6 +50,8 @@ const technologies: Technology[] = [
   { name: "Vue", color: "green", icon: "i-mdi-vuejs" },
   { name: "Nuxt", color: "green", icon: "i-mdi-nuxt" },
   { name: "React", color: "sky", icon: "i-mdi-react" },
+  { name: "Angular", color: "red", icon: "i-mdi-angular" },
+  { name: "Tailwind", color: "sky", icon: "i-mdi-tailwind" },
   { name: "Node.js", color: "lime", icon: "i-mdi-nodejs" },
   { name: "Deno", color: "zinc", icon: "i-bxl-deno" },
   { name: "Bun", color: "zinc", icon: "i-bxl-bun" },
@@ -61,57 +63,104 @@ const technologies: Technology[] = [
   { name: "AWS", color: "orange", icon: "i-mdi-aws" },
   { name: "K8s", color: "blue", icon: "i-mdi-kubernetes" },
   { name: "RKE2", color: "blue", icon: "i-mdi-tractor" },
+  { name: "AI", color: "blue", icon: "i-mdi-sparkles" },
+  // Check
+  // { name: "Java", color: "red", icon: "i-mdi-language-java" },
+  // { name: "Spring Boot", color: "green", icon: "i-bxl-spring-boot" },
+  // { name: "PHP", color: "purple", icon: "i-mdi-language-php" },
+  // { name: "HTML", color: "orange", icon: "i-mdi-language-html5" },
+  // { name: "CSS", color: "blue", icon: "i-mdi-language-css3" },
+  // { name: "SCSS", color: "pink", icon: "i-mdi-sass" },
+  // { name: "Bootstrap", color: "purple", icon: "i-mdi-bootstrap" },
+  // { name: "Git", color: "red", icon: "i-mdi-git" },
 ];
 
+function generateHash(string: string): number {
+  let hash = 0;
+  for (const char of string) {
+    hash = (hash << 5) - hash + char.charCodeAt(0);
+    hash |= 0; // Constrain to 32bit integer
+  }
+  return hash;
+}
+
+function deterministicShuffleArray<T>(array: T[], hashKey: keyof T): T[] {
+  return array
+    .map((value) => ({ value, sort: generateHash(value[hashKey] as string) }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+}
+
+const shuffledTechnologies = deterministicShuffleArray(technologies, "name");
+
 type TimelineItem = {
-  title: string;
-  info: string;
-  text: string;
-  type: "job" | "education" | "highlight";
+  org: string;
+  period: string;
+  position: string;
+  description: string;
+  tags: string[];
+  highlight?: boolean;
 };
 
-const timeline: TimelineItem[] = [
+const experience: TimelineItem[] = [
   {
-    title: "FlexHome.Energy",
-    info: "Okt 2024 – heute",
-    text: "Senior Cloud and Software Architect",
-    type: "highlight",
+    position: "Senior Cloud and Software Architect",
+    org: "FlexHome.Energy",
+    period: "Okt 2024 – heute",
+    description:
+      "Entwurf und Entwicklung der Cloud-Architektur und Services für die FlexHome.Energy Plattform, inklusive smarter Energiemanagement-Lösungen mit bidirektionalen Batteriespeichern, Backend mit MQTT-APIs und Zeitreihendatenbanken, einer Analyse- und Verwaltungskonsole und einem REST API-Wrapper für Kunden-Onboarding.",
+    tags: ["AWS", "K8s / RKE2", "TypeScript", "Vue / Nuxt", "Node / Deno / Bun", "InfluxDB", "AI"],
+    highlight: true,
   },
   {
-    title: "Solarnative",
-    info: "Feb 2024 – Sep 2024",
-    text: "Senior Cloud and Software Engineer",
-    type: "job",
+    position: "Senior Cloud and Software Engineer",
+    org: "Solarnative",
+    period: "Feb 2024 – Sep 2024",
+    description:
+      "Ausbau des AWS-Backends mit robusten APIs und Time-Series-Datenbanken für Daten von Mikroinvertern und smarten Gateways für Solaranlagen. Entwicklung einer umfangreichen Electron-Anwendung für R&D, Fertigung und Cloud-Engineering, welche REST-APIs integriert und über Schnittstellen direkt mit Hardware-Komponenten kommuniziert.",
+    tags: ["AWS", "TypeScript", "Vue / Nuxt", "Node", "Electron", "InfluxDB"],
   },
   {
-    title: "ARZ Darmstadt",
-    info: "Apr 2022 – Jan 2024",
-    text: "Softwareingenieur im Bereich Management Information Systems",
-    type: "job",
+    position: "Softwareingenieur im Bereich Management Information Systems",
+    org: "ARZ Darmstadt",
+    period: "Apr 2022 – Jan 2024",
+    description:
+      "Testgetriebene und agile Full-Stack Entwicklung (TDD) von Web-Applikationen. Entwicklung von Android Apps und Backends zum Bestellen von Medikamenten. Migration kritischer Dienste auf einen modernen Tech-Stack mit API-first Design und Module Federation.",
+    tags: ["TypeScript", "Next.js", "Angular", "K8s / Docker", "Java", "Ruby on Rails", "App Development"],
   },
   {
-    title: "TU Darmstadt (Master)",
-    info: "Apr 2022 – heute",
-    text: "Master of Science Informatik",
-    type: "education",
+    position: "Entwickler im Bereich Management Information Systems als Werkstudent",
+    org: "ARZ Darmstadt",
+    period: "Mar 2020 – Mar 2022",
+    description:
+      "Erweiterung und Neuentwicklung von Android Apps und Container-based Backends zum Bestellen von Medikamenten sowie die Entwicklung einer testgetriebenen Full-Stack Applikation für die Heimbelieferung.",
+    tags: ["TypeScript", "Next.js", "K8s / Docker", "Ruby on Rails", "App Development"],
   },
   {
-    title: "ARZ Darmstadt",
-    info: "Mar 2020 – Mar 2022",
-    text: "Entwickler im Bereich MIS als Werkstudent",
-    type: "job",
+    position: "Entwickler als Werksstudent",
+    org: "EKHN",
+    period: "Nov 2015 – Mar 2019",
+    description: "Entwicklung einer webbasierten Auswertungsplattform sowie Analyse und automatisierte Datenverarbeitung mit Excel und VBA.",
+    tags: ["JavaScript", "PHP", "VBA", "Design"],
+  },
+];
+
+const education: TimelineItem[] = [
+  {
+    position: "Master of Science Informatik",
+    org: "TU Darmstadt (Master)",
+    period: "Apr 2022 – heute",
+    description:
+      "Schwerpunkt auf Internet-/Web-Systemen und KI/ML mit Vertiefung in Computer Vision, NLP / Deep Learning, statistischem und kontinuierlichem Lernen sowie ergänzenden Modulen in Ambient Intelligence, Quantencomputing und KI-Sicherheit.",
+    tags: ["AI", "System Design", "UI/UX"],
   },
   {
-    title: "EKHN",
-    info: "Nov 2015 – Mar 2019",
-    text: "Entwickler als Werksstudent",
-    type: "job",
-  },
-  {
-    title: "TU Darmstadt (Bachelor)",
-    info: "Okt 2015 – Mar 2022",
-    text: "Bachelor of Science Informatik",
-    type: "education",
+    position: "Bachelor of Science Informatik",
+    org: "TU Darmstadt (Bachelor)",
+    period: "Okt 2015 – Mar 2022",
+    description:
+      'Fokus auf Software- und Systementwicklung, ergänzt durch Visual Computing, HCI, Embedded Systems und KI. Bachelorarbeit: "Potenzialanalyse von benutzergesteuerten Anpassungs- und Analysewerkzeugen für Wertschöpfungsketten"',
+    tags: ["UI/UX", "System Design", "CS Basics"],
   },
 ];
 
@@ -211,13 +260,6 @@ const quickStats = [
 ];
 
 const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | "neutral"> = ["primary", "success", "info", "warning", "error", "neutral"];
-
-function shuffleArray<T>(array: T[]): T[] {
-  return array
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-}
 </script>
 
 <template>
@@ -310,7 +352,7 @@ function shuffleArray<T>(array: T[]): T[] {
             </UPageCard>
           </div>
           <UMarquee :overlay="false" :ui="{ root: '[--gap:--spacing(3)] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]' }">
-            <UBadge v-for="tech in shuffleArray(technologies)" :key="tech.name" :color="tech.color" variant="subtle" size="lg" :icon="tech.icon">
+            <UBadge v-for="tech in shuffledTechnologies" :key="tech.name" :color="tech.color" variant="subtle" size="lg" :icon="tech.icon">
               {{ tech.name }}
             </UBadge>
           </UMarquee>
@@ -323,14 +365,55 @@ function shuffleArray<T>(array: T[]): T[] {
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Experience</h2>
           </div>
           <div class="grid gap-4">
-            <UCard v-for="item in timeline" :key="`${item.title}-${item.info}`" variant="subtle" class="relative pr-4 pl-2 bg-transparent" :class="{ 'bg-neutral-500/15': item.type === 'highlight' }">
-              <div class="flex flex-wrap gap-3 justify-between items-center">
-                <div>
-                  <h3 class="text-xl font-semibold text-highlighted">{{ item.title }}</h3>
-                  <p class="mt-2 text-muted">{{ item.text }}</p>
+            <UCard
+              v-for="item in experience"
+              :key="`${item.org}-${item.period}`"
+              variant="subtle"
+              class="relative pr-4 pl-2 bg-transparent card-experience"
+              :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
+              <div class="flex flex-col gap-3 justify-between md:items-center md:flex-row">
+                <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
+                <div class="grow">
+                  <h3 class="inline-block text-xl font-semibold">
+                    {{ item.org }} <span class="text-lg text-muted">– {{ item.position }}</span>
+                  </h3>
+                  <p class="mt-2 text-muted">{{ item.description }}</p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <UBadge v-for="tag in item.tags" :key="tag" variant="subtle" size="sm" color="neutral">
+                      {{ tag }}
+                    </UBadge>
+                  </div>
                 </div>
-                <span class="text-muted">{{ item.info }}</span>
-                <UIcon v-if="item.type === 'education'" name="i-mdi-university" class="absolute -right-2 -top-4 rotate-14 text-neutral-500/7 size-40" />
+              </div>
+            </UCard>
+          </div>
+        </section>
+
+        <section id="experience" class="space-y-8">
+          <div class="text-center">
+            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Education</h2>
+          </div>
+          <div class="grid gap-4">
+            <UCard
+              v-for="item in education"
+              :key="`${item.org}-${item.period}`"
+              variant="subtle"
+              class="relative pr-4 pl-2 bg-transparent card-experience"
+              :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
+              <div class="flex flex-col gap-3 justify-between md:items-center md:flex-row">
+                <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
+                <UIcon name="i-mdi-university" class="absolute -right-2 -bottom-6 rotate-14 text-neutral-500/7 size-40" />
+                <div class="grow">
+                  <h3 class="inline-block text-xl font-semibold">
+                    {{ item.org }} <span class="text-lg text-muted">– {{ item.position }}</span>
+                  </h3>
+                  <p class="mt-2 text-muted">{{ item.description }}</p>
+                  <div class="flex flex-wrap gap-2 mt-4">
+                    <UBadge v-for="tag in item.tags" :key="tag" variant="subtle" size="sm" color="neutral">
+                      {{ tag }}
+                    </UBadge>
+                  </div>
+                </div>
               </div>
             </UCard>
           </div>
@@ -348,7 +431,7 @@ function shuffleArray<T>(array: T[]): T[] {
               :key="project.title"
               spotlight
               :spotlight-color="project.accentColor"
-              class="p-0 transition-all duration-300 spotlightcard group hover:-translate-y-1"
+              class="p-0 transition-all duration-300 card-spotlight group hover:-translate-y-1"
               :ui="{
                 container: `overflow-hidden rounded-lg p-0! flex! flex-row! gap-0! ${index % 2 === 1 ? 'flex-row-reverse!' : ''}`,
               }">
@@ -443,17 +526,15 @@ function shuffleArray<T>(array: T[]): T[] {
 </template>
 
 <style lang="scss">
-// @property --spotlight-color {
-//   initial-value: var(--ui-primary);
-//   inherits: true;
-//   syntax: "<color>";
-// }
-.spotlightcard {
+.card-spotlight {
   &:not(:hover)::before {
     opacity: 0;
   }
   &::before {
     transition: opacity 0.5s ease-in-out;
   }
+}
+.card-experience {
+  --tw-ring-color: color-mix(in srgb, var(--ui-border) 50%, transparent);
 }
 </style>
