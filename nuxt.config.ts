@@ -103,6 +103,9 @@ export default defineNuxtConfig({
         },
       ],
     },
+    rootAttrs: {
+      class: "isolation-auto!", // NuxtUI adds the `isolation` class, which messes with backdrop effects
+    },
     pageTransition: { name: "page", mode: "out-in" },
     layoutTransition: { name: "layout", mode: "out-in" },
   },
