@@ -264,39 +264,14 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
 <template>
   <div class="min-h-screen dark:bg-neutral-950/75">
-    <header class="sticky top-0 z-50 border-b backdrop-blur-xl border-default/70 bg-default/70">
-      <UContainer class="py-3">
-        <div class="flex gap-3 justify-between items-center">
-          <div class="flex gap-3 items-center">
-            <UAvatar alt="Robin Uhl" text="RU" color="primary" size="sm" />
-            <div class="flex flex-col">
-              <span class="text-sm font-semibold text-highlighted">Robin Uhl</span>
-              <span class="text-xs text-muted">Senior Cloud & Software Architect</span>
-            </div>
-          </div>
-
-          <nav class="hidden gap-1 items-center md:flex">
-            <UButton v-for="item in navItems" :key="item.href" :href="item.href" as="a" color="neutral" variant="ghost" size="sm">
-              {{ item.label }}
-            </UButton>
-          </nav>
-
-          <div class="flex gap-2 items-center">
-            <UColorModeButton color="primary" variant="soft" />
-            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm">Contact Info</UButton>
-          </div>
-        </div>
-      </UContainer>
-    </header>
-
     <main>
-      <section class="overflow-hidden relative border-b border-default">
+      <section class="overflow-hidden relative pt-10 border-b border-default">
         <div class="absolute inset-0 pointer-events-none">
           <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
           <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-cyan/20" />
           <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-blue/20" />
         </div>
-        <UContainer class="relative py-20 sm:py-24">
+        <UContainer class="relative py-20 max-w-5xl sm:py-24">
           <div class="mx-auto max-w-5xl text-center">
             <UBadge color="primary" variant="soft" size="lg" class="mb-5"> Senior Cloud & Software Architect </UBadge>
             <h1 class="text-4xl font-bold tracking-tight leading-18 text-balance text-highlighted sm:text-6xl">Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.</h1>
@@ -369,7 +344,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               v-for="item in experience"
               :key="`${item.org}-${item.period}`"
               variant="subtle"
-              class="relative pr-4 pl-2 bg-transparent card-experience"
+              class="relative pr-4 pl-2 bg-transparent card-timeline"
               :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
               <div class="flex flex-col gap-3 justify-between md:items-center md:flex-row">
                 <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
@@ -389,7 +364,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </div>
         </section>
 
-        <section id="experience" class="space-y-8">
+        <section id="education" class="space-y-8">
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Education</h2>
           </div>
@@ -398,7 +373,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               v-for="item in education"
               :key="`${item.org}-${item.period}`"
               variant="subtle"
-              class="relative pr-4 pl-2 bg-transparent card-experience"
+              class="relative pr-4 pl-2 bg-transparent card-timeline"
               :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
               <div class="flex flex-col gap-3 justify-between md:items-center md:flex-row">
                 <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
@@ -522,7 +497,26 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
         </div>
       </UContainer>
     </footer>
+
+    <header>
+      <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 mx-auto max-w-5xl border-b backdrop-blur-xl -translate-x-1/2 border-default/70 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
+        <div class="flex gap-3 justify-between items-center">
+          <nav class="hidden gap-1 items-center md:flex">
+            <UButton v-for="item in navItems" :key="item.href" :href="item.href" as="a" color="neutral" variant="ghost" size="sm">
+              {{ item.label }}
+            </UButton>
+          </nav>
+
+          <div class="flex gap-2 items-center">
+            <UColorModeButton color="primary" variant="soft" />
+            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm">Contact Info</UButton>
+          </div>
+        </div>
+      </UCard>
+    </header>
   </div>
+
+  <!-- <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 27.5%; background: #ff000022; z-index: 50; backdrop-filter: blur(98px)">test</div> -->
 </template>
 
 <style lang="scss">
@@ -534,7 +528,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     transition: opacity 0.5s ease-in-out;
   }
 }
-.card-experience {
+.card-timeline {
   --tw-ring-color: color-mix(in srgb, var(--ui-border) 50%, transparent);
 }
 </style>
