@@ -266,6 +266,24 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
 <template>
   <div class="min-h-screen dark:bg-neutral-950/75">
+    <header>
+      <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
+        <div class="flex gap-3 justify-between items-center whitespace-nowrap">
+          <nav class="gap-1 items-center">
+            <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
+            <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
+            <UButton href="#experience" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
+            <UButton href="#projects" as="a" color="neutral" variant="ghost" size="sm" class="max-[328px]:hidden">Projects</UButton>
+          </nav>
+
+          <div class="flex gap-2 items-center">
+            <UColorModeButton color="primary" variant="soft" />
+            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact Info</UButton>
+          </div>
+        </div>
+      </UCard>
+    </header>
+
     <main>
       <section class="overflow-hidden relative pt-10">
         <div class="absolute inset-0 pointer-events-none">
@@ -286,43 +304,35 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
-            <UPageCard v-for="item in quickStats" :key="item.label" :title="item.label" :description="item.value" spotlight spotlight-color="primary" />
+            <UPageCard v-for="item in quickStats" :key="item.label" :title="item.label" :description="item.value" spotlight class="card-spotlight-subtle" />
           </div>
-        </UContainer>
-      </section>
-
-      <!-- <section id="about" class="space-y-5 text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
-          <UCard variant="soft" class="mx-auto max-w-4xl">
-            <p class="mx-auto max-w-3xl leading-8 text-toned">
-              Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
-              Backend und Cloud-Betrieb.
-            </p>
-          </UCard>
-        </section>
-
-        <USeparator /> -->
-
-      <section id="about" class="space-y-5 text-center bg-neutral-900">
-        <UContainer class="py-14 space-y-12 sm:py-20">
-          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
-          <p class="mx-auto max-w-3xl leading-8 text-toned">
-            Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
-            Backend und Cloud-Betrieb. Darüber hinaus arbeite ich auch an Projekten in den Bereichen KI, App-Entwicklung und Design.
-          </p>
         </UContainer>
       </section>
 
       <UContainer class="py-14 space-y-20 max-w-5xl sm:py-16">
+        <section id="about" class="space-y-5 text-center">
+          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
+          <UPageCard spotlight class="card-spotlight-subtle">
+            <p class="mx-auto max-w-3xl leading-8 text-toned">
+              Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
+              Backend und Cloud-Betrieb.
+            </p>
+          </UPageCard>
+        </section>
+
+        <USeparator class="opacity-0" />
+
         <section id="focus" class="space-y-8">
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Focus Areas</h2>
           </div>
-          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <UPageCard v-for="area in focusAreas" :key="area.title" spotlight :spotlight-color="area.color" class="overflow-hidden card-spotlight group">
-              <UIcon
-                :name="area.icon"
-                class="absolute -bottom-4 -right-4 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-34 group-hover:text-(--spotlight-color) transition-all duration-300" />
+          <div class="grid gap-4 min-[520px]:grid-cols-2 min-[820px]:grid-cols-3">
+            <UPageCard v-for="area in focusAreas" :key="area.title" spotlight :spotlight-color="area.color" class="card-spotlight group">
+              <div class="overflow-hidden absolute inset-0">
+                <UIcon
+                  :name="area.icon"
+                  class="absolute -bottom-4 -right-4 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-34 group-hover:text-(--spotlight-color) transition-all duration-300" />
+              </div>
               <h3 class="relative">
                 <UBadge :color="area.color" variant="soft" size="lg" class="mb-1">{{ area.title }}</UBadge>
               </h3>
@@ -338,7 +348,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </UMarquee>
         </section>
 
-        <USeparator />
+        <USeparator class="opacity-0" />
 
         <section id="experience" class="space-y-8">
           <div class="text-center">
@@ -368,6 +378,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </UCard>
           </div>
         </section>
+
+        <USeparator class="opacity-0" />
 
         <section id="education" class="space-y-8">
           <div class="text-center">
@@ -399,7 +411,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </div>
         </section>
 
-        <USeparator />
+        <USeparator class="opacity-0" />
 
         <section id="projects" class="space-y-8">
           <div class="text-center">
@@ -459,6 +471,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </div>
         </section>
 
+        <USeparator class="opacity-0" />
+
         <section id="links" class="py-14 space-y-8 rounded-lg bg-neutral-900">
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Find Me Online</h2>
@@ -471,6 +485,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </a>
           </div>
         </section>
+
+        <USeparator class="opacity-0" />
 
         <section id="contact" class="space-y-8">
           <div class="text-center">
@@ -502,29 +518,13 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
         </div>
       </UContainer>
     </footer>
-
-    <header>
-      <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 mx-auto max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
-        <div class="flex gap-3 justify-between items-center">
-          <nav class="hidden gap-1 items-center md:flex">
-            <UButton v-for="item in navItems" :key="item.href" :href="item.href" as="a" color="neutral" variant="ghost" size="sm">
-              {{ item.label }}
-            </UButton>
-          </nav>
-
-          <div class="flex gap-2 items-center">
-            <UColorModeButton color="primary" variant="soft" />
-            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm">Contact Info</UButton>
-          </div>
-        </div>
-      </UCard>
-    </header>
   </div>
-
-  <!-- <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 27.5%; background: #ff000022; z-index: 50; backdrop-filter: blur(98px)">test</div> -->
 </template>
 
 <style lang="scss">
+.card-spotlight-subtle {
+  --spotlight-color: color-mix(in srgb, var(--ui-color-neutral-500), transparent 70%);
+}
 .card-spotlight {
   &:not(:hover)::before {
     opacity: 0;
