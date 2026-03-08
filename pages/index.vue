@@ -247,14 +247,6 @@ const contactLinks = [
 
 const currentYear = new Date().getFullYear();
 
-const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Focus", href: "#focus" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
-
 const quickStats = [
   { label: "Experience", value: "10+ Years" },
   { label: "Core Domains", value: "Cloud + Fullstack" },
@@ -341,7 +333,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               </ul>
             </UPageCard>
           </div>
-          <UMarquee :overlay="false" :ui="{ root: '[--gap:--spacing(3)] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]' }">
+          <UMarquee :overlay="false" :ui="{ root: '[--gap:--spacing(3)] [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]', content: '[--duration:30s]' }">
             <UBadge v-for="tech in shuffledTechnologies" :key="tech.name" :color="tech.color" variant="subtle" size="lg" :icon="tech.icon">
               {{ tech.name }}
             </UBadge>
@@ -495,7 +487,6 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </UPageCard>
             <UPageCard spotlight class="card-spotlight-subtle sm:col-start-2 sm:row-start-1 sm:row-span-3" :ui="{ container: 'md:grid justify-center md:gap-y-1!' }">
               <p class="text-xs font-semibold tracking-wide uppercase text-muted">Find me online</p>
-              <!-- <h3 class="text-xl font-semibold tracking-tight text-highlighted sm:text-2xl">Find Me Online</h3> -->
               <div class="flex gap-7 justify-center items-center sm:flex-col">
                 <a v-for="link in profileLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="pb-3 opacity-70 transition-opacity duration-200 hover:opacity-100 md:pb-0">
                   <UTooltip :text="link.label" :delay-duration="0" arrow :content="{ side: 'right' }" class="hidden sm:block">
