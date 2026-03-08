@@ -240,9 +240,9 @@ const profileLinks = [
 ];
 
 const contactLinks = [
-  { label: "E-Mail", value: "kontakt@uhl.sh", href: "mailto:kontakt@uhl.sh" },
-  { label: "Telefon", value: "+49 159 0245 0748", href: "tel:+4915902450748" },
-  { label: "Standort", value: "Darmstadt", href: "https://www.google.com/maps/place/Darmstadt/" },
+  { label: "E-Mail", value: "kontakt@uhl.sh", href: "mailto:kontakt@uhl.sh", icon: "i-mdi-email" },
+  { label: "Telefon", value: "+49 159 0245 0748", href: "tel:+4915902450748", icon: "i-mdi-phone" },
+  { label: "Standort", value: "Darmstadt", href: "https://www.google.com/maps/place/Darmstadt/", icon: "i-mdi-map-marker" },
 ];
 
 const currentYear = new Date().getFullYear();
@@ -269,7 +269,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     <header>
       <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
         <div class="flex gap-3 justify-between items-center whitespace-nowrap">
-          <nav class="gap-1 items-center">
+          <nav>
             <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
             <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
             <UButton href="#experience" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
@@ -278,7 +278,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
           <div class="flex gap-2 items-center">
             <UColorModeButton color="primary" variant="soft" />
-            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact Info</UButton>
+            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact</UButton>
           </div>
         </div>
       </UCard>
@@ -300,7 +300,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </p>
             <div class="flex flex-wrap gap-3 justify-center items-center mt-9">
               <UButton as="a" href="#projects" color="primary" variant="solid" size="lg"> Projekte ansehen </UButton>
-              <UButton as="a" href="#focus" color="info" variant="soft" size="lg"> Technischer Fokus </UButton>
+              <UButton as="a" href="#focus" color="secondary" variant="soft" size="lg"> Technischer Fokus </UButton>
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
@@ -473,35 +473,40 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 
         <USeparator class="opacity-0" />
 
-        <section id="links" class="py-14 space-y-8 rounded-lg bg-neutral-900">
-          <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Find Me Online</h2>
-          </div>
-          <div class="flex gap-8 justify-center">
-            <a v-for="link in profileLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="opacity-70 transition-opacity duration-200 hover:opacity-100">
-              <UTooltip :text="link.label" :delay-duration="0" arrow :content="{ side: 'bottom' }">
-                <UIcon :name="link.icon" class="size-8" />
-              </UTooltip>
-            </a>
-          </div>
-        </section>
-
-        <USeparator class="opacity-0" />
-
         <section id="contact" class="space-y-8">
           <div class="text-center">
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Contact</h2>
           </div>
-          <div class="grid gap-4 mx-auto max-w-3xl">
-            <UCard v-for="(entry, idx) in contactLinks" :key="entry.label" variant="soft">
+          <div class="grid grid-cols-1 gap-4 mx-auto max-w-5xl sm:grid-cols-[1fr_14rem]">
+            <UPageCard v-for="entry in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
               <div class="flex flex-wrap gap-3 justify-between items-center">
                 <div>
                   <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
-                  <p class="mt-1 text-lg font-semibold text-highlighted">{{ entry.value }}</p>
+                  <a class="block mt-1 text-lg font-semibold transition-colors duration-200 text-highlighted group-hover:underline" :href="entry.href" target="_blank" rel="noreferrer">{{
+                    entry.value
+                  }}</a>
                 </div>
-                <UButton as="a" :href="entry.href" target="_blank" rel="noreferrer" :color="accentTones[idx % accentTones.length]" variant="solid"> Open </UButton>
+                <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer">
+                  <UIcon
+                    :name="entry.icon"
+                    class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24" />
+                </a>
               </div>
-            </UCard>
+            </UPageCard>
+            <UPageCard spotlight class="card-spotlight-subtle sm:col-start-2 sm:row-start-1 sm:row-span-3" :ui="{ container: 'md:grid justify-center md:gap-y-1!' }">
+              <p class="text-xs font-semibold tracking-wide uppercase text-muted">Find me online</p>
+              <!-- <h3 class="text-xl font-semibold tracking-tight text-highlighted sm:text-2xl">Find Me Online</h3> -->
+              <div class="flex gap-7 justify-center items-center sm:flex-col">
+                <a v-for="link in profileLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="pb-3 opacity-70 transition-opacity duration-200 hover:opacity-100 md:pb-0">
+                  <UTooltip :text="link.label" :delay-duration="0" arrow :content="{ side: 'right' }" class="hidden sm:block">
+                    <UIcon :name="link.icon" class="size-8" />
+                  </UTooltip>
+                  <UTooltip :text="link.label" :delay-duration="0" arrow :content="{ side: 'bottom' }" class="block sm:hidden">
+                    <UIcon :name="link.icon" class="size-8" />
+                  </UTooltip>
+                </a>
+              </div>
+            </UPageCard>
           </div>
         </section>
       </UContainer>
