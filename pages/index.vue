@@ -35,9 +35,9 @@ const focusAreas: FocusArea[] = [
   { title: "Frontend", color: "blue", icon: "i-mdi-web", details: ["React, Next.js, Preact", "Vue, Nuxt", "UI Systems"] },
   { title: "Backend", color: "green", icon: "i-mdi-server", details: ["Node.js, Deno, Bun", "Ruby on Rails", "API Design"] },
   { title: "Cloud & DevOps", color: "sky", icon: "i-mdi-cloud", details: ["AWS", "K8s, Docker", "CI/CD"] },
-  { title: "Mobile", color: "purple", icon: "i-mdi-smartphone", details: ["React Native", "Native Android", "Hybrid Apps"] },
-  { title: "Data", color: "yellow", icon: "i-mdi-database", details: ["PostgreSQL, MySQL", "InfluxDB, S3", "AI"] },
   { title: "Architecture", color: "red", icon: "i-mdi-architecture", details: ["Cloud-Native, Containerization", "Event-Driven, API-First", "High-Availability, Scalability"] },
+  { title: "Data", color: "yellow", icon: "i-mdi-database", details: ["PostgreSQL, MySQL", "InfluxDB, S3", "AI"] },
+  { title: "Mobile", color: "purple", icon: "i-mdi-smartphone", details: ["React Native", "Native Android", "Hybrid Apps"] },
 ];
 
 type Technology = {
