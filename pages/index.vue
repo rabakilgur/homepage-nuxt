@@ -261,7 +261,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     <header>
       <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
         <div class="flex gap-3 justify-between items-center whitespace-nowrap">
-          <nav>
+          <nav role="navigation">
             <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
             <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
             <UButton href="#experience" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
@@ -276,7 +276,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
       </UCard>
     </header>
 
-    <main>
+    <main role="main">
       <section class="overflow-hidden relative pt-10">
         <div class="absolute inset-0 pointer-events-none">
           <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
@@ -455,7 +455,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
                   variant="subtle"
                   size="sm"
                   icon="i-mdi-open-in-new"
-                  class="absolute -bottom-1 right-4">
+                  class="absolute -bottom-1 right-4"
+                  :aria-label="`Open project '${project.title}' in new tab`">
                   Open Project
                 </UButton>
               </div>
@@ -474,11 +475,16 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               <div class="flex flex-wrap gap-3 justify-between items-center">
                 <div>
                   <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
-                  <a class="block mt-1 text-lg font-semibold transition-colors duration-200 text-highlighted group-hover:underline" :href="entry.href" target="_blank" rel="noreferrer">{{
-                    entry.value
-                  }}</a>
+                  <a
+                    class="block mt-1 text-lg font-semibold transition-colors duration-200 text-highlighted group-hover:underline"
+                    :href="entry.href"
+                    target="_blank"
+                    rel="noreferrer"
+                    :aria-label="entry.label">
+                    {{ entry.value }}
+                  </a>
                 </div>
-                <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer">
+                <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer" :aria-label="entry.label">
                   <UIcon
                     :name="entry.icon"
                     class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24" />
@@ -488,7 +494,14 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <UPageCard spotlight class="card-spotlight-subtle sm:col-start-2 sm:row-start-1 sm:row-span-3" :ui="{ container: 'md:grid justify-center md:gap-y-1!' }">
               <p class="text-xs font-semibold tracking-wide uppercase text-muted">Find me online</p>
               <div class="flex gap-7 justify-center items-center sm:flex-col">
-                <a v-for="link in profileLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="pb-3 opacity-70 transition-opacity duration-200 hover:opacity-100 md:pb-0">
+                <a
+                  v-for="link in profileLinks"
+                  :key="link.label"
+                  :href="link.href"
+                  target="_blank"
+                  rel="noreferrer"
+                  class="pb-3 opacity-70 transition-opacity duration-200 hover:opacity-100 md:pb-0"
+                  :aria-label="link.label">
                   <UTooltip :text="link.label" :delay-duration="0" arrow :content="{ side: 'right' }" class="hidden sm:block">
                     <UIcon :name="link.icon" class="size-8" />
                   </UTooltip>
@@ -503,7 +516,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
       </UContainer>
     </main>
 
-    <footer class="py-10 border-t border-default">
+    <footer class="py-10 border-t border-default" role="contentinfo">
       <UContainer class="text-sm text-center text-muted">
         <p>Copyright {{ currentYear }}</p>
         <p class="mt-1">Made with ♥ by Robin Uhl</p>
