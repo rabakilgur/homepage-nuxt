@@ -26,16 +26,18 @@ type Color = SemanticColor | CommonColor;
 
 type FocusArea = {
   title: string;
+  color: CommonColor;
+  icon: string;
   details: string[];
 };
 
 const focusAreas: FocusArea[] = [
-  { title: "Frontend", details: ["React, Next.js, Preact", "Vue, Nuxt", "UI Systems"] },
-  { title: "Backend", details: ["Node.js, Deno, Bun", "Ruby on Rails", "API Design"] },
-  { title: "Cloud & DevOps", details: ["AWS", "K8s, Docker", "CI/CD"] },
-  { title: "Mobile", details: ["React Native", "Native Android", "Hybrid Apps"] },
-  { title: "Data", details: ["PostgreSQL, MySQL", "InfluxDB, S3", "AI"] },
-  { title: "Architecture", details: ["Cloud-Native, Containerization", "Event-Driven, API-First", "High-Availability, Scalability"] },
+  { title: "Frontend", color: "blue", icon: "i-mdi-web", details: ["React, Next.js, Preact", "Vue, Nuxt", "UI Systems"] },
+  { title: "Backend", color: "green", icon: "i-mdi-server", details: ["Node.js, Deno, Bun", "Ruby on Rails", "API Design"] },
+  { title: "Cloud & DevOps", color: "sky", icon: "i-mdi-cloud", details: ["AWS", "K8s, Docker", "CI/CD"] },
+  { title: "Mobile", color: "purple", icon: "i-mdi-smartphone", details: ["React Native", "Native Android", "Hybrid Apps"] },
+  { title: "Data", color: "yellow", icon: "i-mdi-database", details: ["PostgreSQL, MySQL", "InfluxDB, S3", "AI"] },
+  { title: "Architecture", color: "red", icon: "i-mdi-architecture", details: ["Cloud-Native, Containerization", "Event-Driven, API-First", "High-Availability, Scalability"] },
 ];
 
 type Technology = {
@@ -265,7 +267,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
 <template>
   <div class="min-h-screen dark:bg-neutral-950/75">
     <main>
-      <section class="overflow-hidden relative pt-10 border-b border-default">
+      <section class="overflow-hidden relative pt-10">
         <div class="absolute inset-0 pointer-events-none">
           <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
           <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-cyan/20" />
@@ -317,11 +319,14 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Focus Areas</h2>
           </div>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <UPageCard v-for="(area, index) in focusAreas" :key="area.title" spotlight spotlight-color="neutral">
-              <h3>
-                <UBadge :color="accentTones[index % accentTones.length]" variant="soft" size="lg" class="mb-1">{{ area.title }}</UBadge>
+            <UPageCard v-for="area in focusAreas" :key="area.title" spotlight :spotlight-color="area.color" class="overflow-hidden card-spotlight group">
+              <UIcon
+                :name="area.icon"
+                class="absolute -bottom-4 -right-4 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-34 group-hover:text-(--spotlight-color) transition-all duration-300" />
+              <h3 class="relative">
+                <UBadge :color="area.color" variant="soft" size="lg" class="mb-1">{{ area.title }}</UBadge>
               </h3>
-              <ul class="space-y-2 text-sm text-toned">
+              <ul class="relative space-y-2 text-sm text-toned">
                 <li v-for="detail in area.details" :key="detail">{{ detail }}</li>
               </ul>
             </UPageCard>
@@ -499,7 +504,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
     </footer>
 
     <header>
-      <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 mx-auto max-w-5xl border-b backdrop-blur-xl -translate-x-1/2 border-default/70 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
+      <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 mx-auto max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
         <div class="flex gap-3 justify-between items-center">
           <nav class="hidden gap-1 items-center md:flex">
             <UButton v-for="item in navItems" :key="item.href" :href="item.href" as="a" color="neutral" variant="ghost" size="sm">
