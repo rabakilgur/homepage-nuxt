@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { Analytics } from "@vercel/analytics/nuxt";
+import { SpeedInsights } from "@vercel/speed-insights/nuxt";
+
 useHead({
   title: "Robin Uhl – Homepage",
   htmlAttrs: { lang: "de" },
@@ -10,6 +13,8 @@ useHead({
   <UApp>
     <NuxtLoadingIndicator />
     <NuxtRouteAnnouncer />
+    <Analytics />
+    <SpeedInsights />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
