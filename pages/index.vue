@@ -275,21 +275,18 @@ const quickStats = [
       </UCard>
     </header>
 
-    <svg width="0" height="0" aria-hidden="true">
-      <filter id="dither3" primitiveUnits="objectBoundingBox">
-        <feTurbulence type="fractalNoise" baseFrequency="3.71"></feTurbulence>
-        <feDisplacementMap in="SourceGraphic" scale=".2" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
-        <feBlend in2="SourceGraphic"></feBlend>
-      </filter>
-    </svg>
-
     <main role="main">
-      <section class="overflow-hidden relative pt-10">
-        <div class="absolute inset-0 pointer-events-none">
+      <section class="relative pt-10">
+        <!-- <div class="absolute inset-0 pointer-events-none">
           <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-cyan/20" />
           <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
           <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-blue/20" />
+        </div> -->
+        <div class="absolute inset-0 pointer-events-none">
+          <div class="absolute -left-24 top-30 rounded-full w-130 h-130 blur-[100px] bg-[#0170FE]/15" />
+          <div class="absolute -top-24 -right-28 rounded-full w-130 h-130 blur-[100px] bg-[#0088FF]/15" />
         </div>
+        <ParticleWave class="absolute top-0 left-0 w-full opacity-100 h-150" />
         <UContainer class="relative pt-20 pb-10 max-w-5xl sm:pt-24 sm:pb-14">
           <div class="mx-auto max-w-5xl text-center">
             <UBadge color="primary" variant="soft" size="lg" class="mb-5"> Senior Cloud & Software Architect </UBadge>
