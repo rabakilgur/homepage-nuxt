@@ -258,7 +258,7 @@ const quickStats = [
   <div class="min-h-screen dark:bg-neutral-950/75">
     <header>
       <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
-        <div class="absolute inset-0 opacity-4 dark:opacity-3 bg-noise"></div>
+        <div class="absolute inset-0 opacity-4 dark:opacity-2 bg-noise"></div>
         <div class="flex relative gap-3 justify-between items-center whitespace-nowrap">
           <nav role="navigation">
             <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
@@ -275,14 +275,22 @@ const quickStats = [
       </UCard>
     </header>
 
+    <svg width="0" height="0" aria-hidden="true">
+      <filter id="dither3" primitiveUnits="objectBoundingBox">
+        <feTurbulence type="fractalNoise" baseFrequency="3.71"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" scale=".2" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        <feBlend in2="SourceGraphic"></feBlend>
+      </filter>
+    </svg>
+
     <main role="main">
       <section class="overflow-hidden relative pt-10">
         <div class="absolute inset-0 pointer-events-none">
-          <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
           <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-cyan/20" />
+          <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
           <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-blue/20" />
         </div>
-        <UContainer class="relative py-20 max-w-5xl sm:py-24">
+        <UContainer class="relative pt-20 pb-10 max-w-5xl sm:pt-24 sm:pb-14">
           <div class="mx-auto max-w-5xl text-center">
             <UBadge color="primary" variant="soft" size="lg" class="mb-5"> Senior Cloud & Software Architect </UBadge>
             <h1 class="text-4xl font-bold tracking-tight leading-18 text-balance text-highlighted sm:text-6xl">Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.</h1>
@@ -310,9 +318,9 @@ const quickStats = [
         </UContainer>
       </section>
 
-      <UContainer class="py-14 space-y-20 max-w-5xl sm:py-16">
-        <section id="about" class="space-y-5 text-center">
-          <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
+      <UContainer class="pb-10 space-y-5 max-w-5xl">
+        <Section id="about">
+          <Heading>About</Heading>
           <UPageCard spotlight class="card-spotlight-subtle">
             <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
             <p class="relative mx-auto max-w-3xl leading-8 text-toned">
@@ -320,14 +328,10 @@ const quickStats = [
               Backend und Cloud-Betrieb.
             </p>
           </UPageCard>
-        </section>
+        </Section>
 
-        <USeparator class="opacity-0" />
-
-        <section id="focus" class="space-y-8">
-          <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Focus Areas</h2>
-          </div>
+        <Section id="focus">
+          <Heading>Focus Areas</Heading>
           <div class="grid gap-4 min-[520px]:grid-cols-2 min-[820px]:grid-cols-3">
             <UPageCard v-for="area in focusAreas" :key="area.title" spotlight :spotlight-color="area.color" class="card-spotlight group">
               <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
@@ -349,14 +353,10 @@ const quickStats = [
               {{ tech.name }}
             </UBadge>
           </UMarquee>
-        </section>
+        </Section>
 
-        <USeparator class="opacity-0" />
-
-        <section id="experience" class="space-y-8">
-          <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Experience</h2>
-          </div>
+        <Section id="experience">
+          <Heading>Experience</Heading>
           <div class="grid gap-4">
             <UCard
               v-for="item in experience"
@@ -381,14 +381,10 @@ const quickStats = [
               </div>
             </UCard>
           </div>
-        </section>
+        </Section>
 
-        <USeparator class="opacity-0" />
-
-        <section id="education" class="space-y-8">
-          <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Education</h2>
-          </div>
+        <Section id="education">
+          <Heading>Education</Heading>
           <div class="grid gap-4">
             <UCard
               v-for="item in education"
@@ -413,14 +409,10 @@ const quickStats = [
               </div>
             </UCard>
           </div>
-        </section>
+        </Section>
 
-        <USeparator class="opacity-0" />
-
-        <section id="projects" class="space-y-8">
-          <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Selected Projects</h2>
-          </div>
+        <Section id="projects">
+          <Heading>Selected Projects</Heading>
           <div class="grid gap-5">
             <UPageCard
               v-for="(project, index) in projects"
@@ -474,14 +466,10 @@ const quickStats = [
               </div>
             </UPageCard>
           </div>
-        </section>
+        </Section>
 
-        <USeparator class="opacity-0" />
-
-        <section id="contact" class="space-y-8">
-          <div class="text-center">
-            <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Contact</h2>
-          </div>
+        <Section id="contact">
+          <Heading>Contact</Heading>
           <div class="grid grid-cols-1 gap-4 mx-auto max-w-5xl sm:grid-cols-[1fr_14rem]">
             <UPageCard v-for="(entry, index) in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
               <div v-if="index === 1" class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
@@ -526,7 +514,7 @@ const quickStats = [
               </div>
             </UPageCard>
           </div>
-        </section>
+        </Section>
       </UContainer>
     </main>
 
@@ -558,5 +546,17 @@ const quickStats = [
 }
 .card-timeline {
   --tw-ring-color: color-mix(in srgb, var(--ui-border) 50%, transparent);
+}
+
+.gradient-circle {
+  --size: 26rem;
+  --color: var(--ui-blue);
+  --color-center: color-mix(in srgb, var(--color) 10%, transparent);
+  --color-edge: color-mix(in srgb, var(--color) 4%, transparent);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-image: radial-gradient(circle calc(var(--size) / 2) at center, var(--color-center) 0%, var(--color-center) 20%, transparent 100%);
+  filter: url(#dither3);
 }
 </style>
