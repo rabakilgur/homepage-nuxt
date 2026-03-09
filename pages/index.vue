@@ -252,15 +252,14 @@ const quickStats = [
   { label: "Core Domains", value: "Cloud + Fullstack" },
   { label: "Current Role", value: "Senior Cloud & Software Architect" },
 ];
-
-const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | "neutral"> = ["primary", "success", "info", "warning", "error", "neutral"];
 </script>
 
 <template>
   <div class="min-h-screen dark:bg-neutral-950/75">
     <header>
       <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
-        <div class="flex gap-3 justify-between items-center whitespace-nowrap">
+        <div class="absolute inset-0 opacity-4 dark:opacity-3 bg-noise"></div>
+        <div class="flex relative gap-3 justify-between items-center whitespace-nowrap">
           <nav role="navigation">
             <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
             <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
@@ -296,7 +295,17 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
-            <UPageCard v-for="item in quickStats" :key="item.label" :title="item.label" :description="item.value" spotlight class="card-spotlight-subtle" />
+            <UPageCard v-for="item in quickStats" :key="item.label" spotlight class="card-spotlight-subtle">
+              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="relative">
+                <div class="text-base font-semibold text-pretty text-highlighted">
+                  {{ item.label }}
+                </div>
+                <div class="text-[15px] text-pretty text-muted mt-1">
+                  {{ item.value }}
+                </div>
+              </div>
+            </UPageCard>
           </div>
         </UContainer>
       </section>
@@ -305,7 +314,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
         <section id="about" class="space-y-5 text-center">
           <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">About</h2>
           <UPageCard spotlight class="card-spotlight-subtle">
-            <p class="mx-auto max-w-3xl leading-8 text-toned">
+            <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+            <p class="relative mx-auto max-w-3xl leading-8 text-toned">
               Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
               Backend und Cloud-Betrieb.
             </p>
@@ -320,6 +330,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
           </div>
           <div class="grid gap-4 min-[520px]:grid-cols-2 min-[820px]:grid-cols-3">
             <UPageCard v-for="area in focusAreas" :key="area.title" spotlight :spotlight-color="area.color" class="card-spotlight group">
+              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="overflow-hidden absolute inset-0">
                 <UIcon
                   :name="area.icon"
@@ -353,7 +364,8 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               variant="subtle"
               class="relative pr-4 pl-2 bg-transparent card-timeline"
               :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
-              <div class="flex flex-col gap-3 justify-between md:items-center md:flex-row">
+              <div v-if="item.highlight" class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="flex relative flex-col gap-3 justify-between md:items-center md:flex-row">
                 <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
                 <div class="grow">
                   <h3 class="inline-block text-xl font-semibold">
@@ -422,7 +434,7 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
               <div
                 class="absolute inset-0 opacity-4"
                 :style="`background: linear-gradient(to ${index % 2 === 0 ? 'right' : 'left'}, transparent 60%, var(--ui-color-${project.accentColor}-500));`"></div>
-              <div class="absolute inset-0 mix-blend-multiply opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div
                 class="hidden overflow-hidden relative w-80 shrink-0 grow-0 md:block"
                 :class="{
@@ -471,8 +483,9 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
             <h2 class="text-3xl font-semibold tracking-tight text-highlighted sm:text-4xl">Contact</h2>
           </div>
           <div class="grid grid-cols-1 gap-4 mx-auto max-w-5xl sm:grid-cols-[1fr_14rem]">
-            <UPageCard v-for="entry in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
-              <div class="flex flex-wrap gap-3 justify-between items-center">
+            <UPageCard v-for="(entry, index) in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
+              <div v-if="index === 1" class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="flex relative flex-wrap gap-3 justify-between items-center">
                 <div>
                   <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
                   <a
@@ -484,16 +497,17 @@ const accentTones: Array<"primary" | "success" | "info" | "warning" | "error" | 
                     {{ entry.value }}
                   </a>
                 </div>
-                <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer" :aria-label="entry.label">
-                  <UIcon
-                    :name="entry.icon"
-                    class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24" />
-                </a>
               </div>
+              <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer" :aria-label="entry.label">
+                <UIcon
+                  :name="entry.icon"
+                  class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24" />
+              </a>
             </UPageCard>
             <UPageCard spotlight class="card-spotlight-subtle sm:col-start-2 sm:row-start-1 sm:row-span-3" :ui="{ container: 'md:grid justify-center md:gap-y-1!' }">
-              <p class="text-xs font-semibold tracking-wide uppercase text-muted">Find me online</p>
-              <div class="flex gap-7 justify-center items-center sm:flex-col">
+              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <p class="relative text-xs font-semibold tracking-wide uppercase text-muted">Find me online</p>
+              <div class="flex relative gap-7 justify-center items-center sm:flex-col">
                 <a
                   v-for="link in profileLinks"
                   :key="link.label"
