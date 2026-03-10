@@ -284,14 +284,17 @@ const quickStats = [
         <ParticleWave class="absolute top-0 left-0 w-full opacity-100 h-150" />
         <UContainer class="relative pt-20 pb-10 max-w-5xl sm:pt-24 sm:pb-14">
           <div class="mx-auto max-w-5xl text-center">
-            <UBadge color="primary" variant="soft" size="lg" class="mb-5"> Senior Cloud & Software Architect </UBadge>
-            <h1 class="text-4xl font-bold tracking-tight leading-18 text-balance text-highlighted sm:text-6xl">Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.</h1>
-            <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-toned">
-              Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Losungen mit Fokus auf saubere Architektur, stabile Systeme und nachhaltige Weiterentwicklung.
+            <UBadge color="primary" variant="soft" size="lg" class="mb-5 backdrop-blur"> Senior Cloud & Software Architect </UBadge>
+            <h1 class="text-4xl font-bold tracking-tight leading-18 text-balance text-highlighted sm:text-6xl text-shadow-[0_0_10px_white] dark:text-shadow-[0_0_10px_var(--color-neutral-950)]">
+              Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.
+            </h1>
+            <p
+              class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-toned text-shadow-[0_0_1px_white,0_0_3px_white,0_0_6px_white,0_0_12px_white,0_0_24px_white,0_0_48px_white] dark:text-shadow-[0_0_4px_var(--color-neutral-950)]">
+              Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Lösungen mit Fokus auf sauberer Architektur, stabilem Systembetrieb und nachhaltiger Weiterentwicklung.
             </p>
             <div class="flex flex-wrap gap-3 justify-center items-center mt-9">
               <UButton as="a" href="#projects" color="primary" variant="solid" size="lg"> Projekte ansehen </UButton>
-              <UButton as="a" href="#focus" color="secondary" variant="soft" size="lg"> Technischer Fokus </UButton>
+              <UButton as="a" href="#focus" color="secondary" variant="soft" size="lg" class="backdrop-blur"> Technischer Fokus </UButton>
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
