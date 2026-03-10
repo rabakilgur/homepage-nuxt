@@ -277,7 +277,7 @@ const quickStats = [
 
     <main role="main">
       <section class="relative pt-10">
-        <div class="absolute inset-0 pointer-events-none">
+        <div class="overflow-hidden absolute inset-0 pointer-events-none -bottom-26">
           <div class="absolute -left-24 top-30 rounded-full w-130 h-130 blur-[100px] bg-[#0170FE]/15" />
           <div class="absolute -top-24 -right-28 rounded-full w-130 h-130 blur-[100px] bg-[#0088FF]/15" />
         </div>
