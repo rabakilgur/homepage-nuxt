@@ -84,7 +84,7 @@ export default class Visual {
   }
 
   handleMouseMove(e: MouseEvent) {
-    if (!isMobile) this.enlargeParticle(e.clientX, e.clientY + document.body.scrollTop);
+    if (!isMobile) this.enlargeParticles(e.clientX, e.clientY + document.body.scrollTop);
   }
 
   handleResize() {
@@ -155,7 +155,7 @@ export default class Visual {
       particle.startY + particle.amplitude * Math.sin(((particle.x / sinSqueeze) * Math.PI) / 180);
   }
 
-  enlargeParticle(clientX: number, clientY: number) {
+  enlargeParticles(clientX: number, clientY: number) {
     if (clientY < this.canvasHeight + 100) {
       this.particles.forEach((particle) => {
         const distance = Math.hypot(particle.x - clientX, particle.y - clientY);
