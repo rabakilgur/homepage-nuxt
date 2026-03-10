@@ -17,7 +17,6 @@ type Particle = {
   };
   speed: number;
   amplitude: number;
-  isBurst: boolean;
 };
 
 // Helper function to get a random value from [low, high]
@@ -93,17 +92,24 @@ export default class Visual {
   }
 
   resizeCanvas() {
+    const oldWidth = this.canvasWidth;
     this.canvasWidth = this.canvas.offsetWidth;
     this.canvasHeight = this.canvas.offsetHeight;
     this.canvas.width = this.canvasWidth * window.devicePixelRatio;
     this.canvas.height = this.canvasHeight * window.devicePixelRatio;
     this.context = this.canvas.getContext("2d")!;
     this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
+    // If the canvas width has increased by more than 20%, recreate all particles:
+    if (oldWidth > 0 && this.canvasWidth / oldWidth > 1.2) {
+      // Recreate all particles:
+      this.particles.forEach((particle) => {
+        this.particles[particle.id] = this.createParticle(particle.id, false);
+      });
+    }
   }
 
   createParticle(id: number, isRecreate?: boolean) {
     const radius = random(this.particleMinRadius, this.particleMaxRadius);
-    // const x = isRecreate ? - radius - random(this.particleMaxRadius * 2, this.canvasWidth) : random(0, this.canvasWidth);
     const x = isRecreate ? 0 - radius : random(0, this.canvasWidth);
     let y = random(this.canvasHeight / 2 - 150, this.canvasHeight / 2 + 150);
     y += random(-100, 100);
@@ -123,7 +129,6 @@ export default class Visual {
       color: { r: 0, g: random(70, 180), b: 255 },
       speed: (alpha + 1) * 0.15,
       amplitude: random(50, 200),
-      isBurst: false,
     };
   }
 
@@ -153,8 +158,6 @@ export default class Visual {
   enlargeParticle(clientX: number, clientY: number) {
     if (clientY < this.canvasHeight + 100) {
       this.particles.forEach((particle) => {
-        if (particle.isBurst) return;
-
         const distance = Math.hypot(particle.x - clientX, particle.y - clientY);
 
         if (distance <= 100) {

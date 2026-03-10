@@ -277,11 +277,6 @@ const quickStats = [
 
     <main role="main">
       <section class="relative pt-10">
-        <!-- <div class="absolute inset-0 pointer-events-none">
-          <div class="absolute -left-16 top-28 w-64 h-64 rounded-full blur-3xl bg-cyan/20" />
-          <div class="absolute -top-24 left-1/2 w-80 h-80 rounded-full blur-3xl -translate-x-1/2 bg-sky/20" />
-          <div class="absolute top-16 -right-16 w-64 h-64 rounded-full blur-3xl bg-blue/20" />
-        </div> -->
         <div class="absolute inset-0 pointer-events-none">
           <div class="absolute -left-24 top-30 rounded-full w-130 h-130 blur-[100px] bg-[#0170FE]/15" />
           <div class="absolute -top-24 -right-28 rounded-full w-130 h-130 blur-[100px] bg-[#0088FF]/15" />
