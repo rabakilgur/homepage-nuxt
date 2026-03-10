@@ -10,6 +10,7 @@ type Particle = {
   startAngle: number;
   endAngle: number;
   alpha: number;
+  glowIntensity: number;
   color: {
     r: number;
     g: number;
@@ -126,10 +127,11 @@ export default class Visual {
       startAngle: 0,
       endAngle: Math.PI * 2,
       alpha: alpha,
+      glowIntensity: random(0.4, 1.3),
       color: { r: 0, g: random(70, 180), b: 255 },
       speed: (alpha + 1) * 0.15,
       amplitude: random(50, 200),
-    };
+    } satisfies Particle;
   }
 
   drawParticles(tslf: DOMHighResTimeStamp) {
@@ -137,7 +139,33 @@ export default class Visual {
       this.moveParticle(particle, tslf);
 
       this.context.beginPath();
-      this.context.fillStyle = `rgba(${particle.color.r}, ${particle.color.g}, ${particle.color.b}, ${particle.alpha})`;
+      // Draw subtle glow
+      const glowIntensity = Math.min(particle.alpha * particle.glowIntensity, 1);
+      this.context.shadowColor = `rgba(${particle.color.r}, ${particle.color.g}, ${particle.color.b}, ${glowIntensity})`;
+      // this.context.shadowColor = `rgba(${255}, ${0}, ${0}, ${1})`;
+      this.context.shadowBlur = particle.radius * 4.0; // subtle: ~1.2 to 2.0
+      this.context.shadowOffsetX = 0;
+      this.context.shadowOffsetY = 0;
+      // Draw gradient background
+      const clamp255 = (v: number) => Math.max(0, Math.min(255, Math.round(v)));
+      const gHigh = clamp255(particle.color.g * 1.3); // 30% higher
+      const gLow = clamp255(particle.color.g * 0.7); // 30% lower
+      const grad = this.context.createLinearGradient(
+        particle.x - particle.radius, // top-left x
+        particle.y - particle.radius, // top-left y
+        particle.x + particle.radius, // bottom-right x
+        particle.y + particle.radius, // bottom-right y
+      );
+      grad.addColorStop(
+        0,
+        `rgba(${particle.color.r}, ${gHigh}, ${particle.color.b}, ${particle.alpha})`,
+      );
+      grad.addColorStop(
+        1,
+        `rgba(${particle.color.r}, ${gLow}, ${particle.color.b}, ${particle.alpha})`,
+      );
+      this.context.fillStyle = grad;
+      // Draw the particle shape
       this.context.arc(
         particle.x,
         particle.y,
@@ -145,7 +173,10 @@ export default class Visual {
         particle.startAngle,
         particle.endAngle,
       );
+      // Fill the particle shape
       this.context.fill();
+      // Reset blur so other drawings are not affected
+      this.context.shadowBlur = 0;
     });
   }
 
@@ -202,13 +233,14 @@ export default class Visual {
       // Recreate particles that moved off the screen:
       const redrawCount = this.particles.reduce(
         (progress, particle) =>
-          progress + (particle.x - particle.radius >= this.canvasWidth ? 1 : 0),
+          progress + (particle.x - particle.radius * 4 >= this.canvasWidth ? 1 : 0),
         0,
       );
       const redrawShare = redrawCount / this.particleCount;
       const shouldRedrawFreely = redrawShare > 0.2;
       this.particles.forEach((particle) => {
-        if (particle.x - particle.radius >= this.canvasWidth) {
+        if (particle.x - particle.radius * 4 >= this.canvasWidth) {
+          // * 4 to account for the glow
           this.particles[particle.id] = this.createParticle(particle.id, !shouldRedrawFreely);
         }
       });
