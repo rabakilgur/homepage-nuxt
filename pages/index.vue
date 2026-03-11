@@ -257,7 +257,7 @@ const quickStats = [
 <template>
   <div class="min-h-screen dark:bg-neutral-950/75">
     <header>
-      <UCard variant="subtle" class="fixed top-3 left-1/2 z-50 max-w-5xl backdrop-blur-xl -translate-x-1/2 bg-default/70" :ui="{ body: 'py-3! px-3!' }">
+      <UCard variant="subtle" class="fixed inset-x-0 top-3 z-50 mx-auto backdrop-blur-xl max-w-fit bg-default/70" :ui="{ body: 'py-3! px-3!' }">
         <div class="absolute inset-0 opacity-4 dark:opacity-2 bg-noise"></div>
         <div class="flex relative gap-3 justify-between items-center whitespace-nowrap">
           <nav role="navigation">
@@ -289,7 +289,7 @@ const quickStats = [
               Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.
             </h1>
             <p
-              class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-toned text-shadow-[0_0_1px_white,0_0_3px_white,0_0_6px_white,0_0_12px_white,0_0_24px_white,0_0_48px_white] dark:text-shadow-[0_0_4px_var(--color-neutral-950)]">
+              class="mx-auto mt-6 max-w-3xl text-balance text-lg leading-8 text-toned text-shadow-[0_0_1px_white,0_0_3px_white,0_0_6px_white,0_0_12px_white,0_0_24px_white,0_0_48px_white] dark:text-shadow-[0_0_4px_var(--color-neutral-950)]">
               Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Lösungen mit Fokus auf sauberer Architektur, stabilem Systembetrieb und nachhaltiger Weiterentwicklung.
             </p>
             <div class="flex flex-wrap gap-3 justify-center items-center mt-9">
@@ -318,10 +318,14 @@ const quickStats = [
           <Heading>About</Heading>
           <UPageCard spotlight class="card-spotlight-subtle">
             <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
-            <p class="relative mx-auto max-w-3xl leading-8 text-toned">
-              Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mein Schwerpunkt liegt auf der Verbindung von nutzerzentriertem Frontend, skalierbarem
-              Backend und Cloud-Betrieb.
-            </p>
+            <div class="flex relative flex-col gap-2 px-4 leading-8 text-toned">
+              <p>
+                Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mir ist es wichtig, Software zu entwickeln, die unternehmensweit echten Impact hat und
+                Nutzern wirklich etwas bringt. Dabei liegt mein Fokus darauf, dass Frontend, Backend und Cloud reibungslos zusammenspielen – sauber umgesetzt, nutzerfreundlich, skalierbar und
+                zuverlässig.
+              </p>
+              <p>Großartige Software entsteht in großartigen Teams. Genau deshalb schätze ich es sehr, Teil eines solchen Teams zu sein.</p>
+            </div>
           </UPageCard>
         </Section>
 
@@ -358,7 +362,7 @@ const quickStats = [
               :key="`${item.org}-${item.period}`"
               variant="subtle"
               class="relative pr-4 pl-2 bg-transparent card-timeline"
-              :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
+              :class="{ 'bg-neutral-500/3 card-timeline--highlighted': item.highlight }">
               <div v-if="item.highlight" class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="flex relative flex-col gap-3 justify-between md:items-center md:flex-row">
                 <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
@@ -467,7 +471,7 @@ const quickStats = [
           <Heading>Contact</Heading>
           <div class="grid grid-cols-1 gap-4 mx-auto max-w-5xl sm:grid-cols-[1fr_14rem]">
             <UPageCard v-for="(entry, index) in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
-              <div v-if="index === 1" class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="flex relative flex-wrap gap-3 justify-between items-center">
                 <div>
                   <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
@@ -539,8 +543,19 @@ const quickStats = [
     transition: opacity 0.5s ease-in-out;
   }
 }
-.card-timeline {
+.card-timeline:not(.card-timeline--highlighted) {
   --tw-ring-color: color-mix(in srgb, var(--ui-border) 50%, transparent);
+}
+.dark {
+  .card-spotlight-subtle > [data-slot="spotlight"],
+  .card-spotlight > [data-slot="spotlight"],
+  .card-timeline--highlighted {
+    --bg-lighter: oklch(from var(--ui-bg) clamp(0, calc(l + 0.02), 1) c h);
+    --bg-darker: oklch(from var(--ui-bg) clamp(0, calc(l - 0.02), 1) c h);
+    --bg-lighter-step: color-mix(in oklab, var(--bg-lighter) 90%, transparent);
+    --bg-darker-step: color-mix(in oklab, var(--bg-darker) 90%, transparent);
+    background: linear-gradient(175deg, var(--bg-lighter), var(--bg-darker));
+  }
 }
 
 .gradient-circle {
