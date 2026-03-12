@@ -20,13 +20,18 @@ type Particle = {
   amplitude: number;
 };
 
+type MousePosition = {
+  x: number;
+  y: number;
+};
+
 // Helper function to get a random value from [low, high]
 const random = (low: number, high: number) => Math.random() * (high - low) + low;
 
 // Squeezes the sinus curve. Smaller values squeeze more.
 const sinSqueeze = isMobile ? 3 : 5;
 
-export default class Visual {
+export class ParticleWaveVisual {
   canvas: HTMLCanvasElement;
   context: CanvasRenderingContext2D;
   canvasWidth: number;
@@ -36,8 +41,10 @@ export default class Visual {
   particleMinRadius: number;
   particleMaxRadius: number;
   lastFrameTimestamp: DOMHighResTimeStamp | undefined;
+  mousePosition: MousePosition | undefined;
   handleMouseMoveBind: typeof this.handleMouseMove;
   handleResizeBind: typeof this.handleResize;
+  stopping: boolean = false;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -51,27 +58,31 @@ export default class Visual {
 
     this.lastFrameTimestamp = undefined;
 
-    this.handleMouseMoveBind = throttle(
-      (e: MouseEvent) => this.handleMouseMove.bind(this)(e),
-      100,
-      "visualHandleMouseMove",
-    );
+    this.handleMouseMoveBind = this.handleMouseMove.bind(this);
     this.handleResizeBind = debounce(
       () => this.handleResize.bind(this)(),
       200,
       "visualHandleMouseMove",
     );
-
-    this.initialize();
-    this.render(0);
   }
 
   initialize() {
     this.resizeCanvas();
+    this.particles = [];
     for (let i = 0; i < this.particleCount; i++) {
       this.particles.push(this.createParticle(i));
     }
     this.bind();
+  }
+
+  start() {
+    this.initialize();
+    this.render(0);
+  }
+
+  stop() {
+    this.unbind();
+    this.stopping = true;
   }
 
   bind() {
@@ -85,7 +96,18 @@ export default class Visual {
   }
 
   handleMouseMove(e: MouseEvent) {
-    if (!isMobile) this.enlargeParticles(e.clientX, e.clientY + document.body.scrollTop);
+    // if (!isMobile) this.enlargeParticles(e.clientX, e.clientY + document.body.scrollTop);
+    if (!isMobile) {
+      // Check if mouse is near the canvas
+      const isNearCanvas = e.clientY + document.body.scrollTop + 100 < this.canvasHeight;
+      if (!isNearCanvas) {
+        // Mouse is far from the canvas, reset mouse position
+        this.mousePosition = undefined;
+      } else {
+        // Mouse is near the canvas, update mouse position
+        this.mousePosition = { x: e.clientX, y: e.clientY + document.body.scrollTop };
+      }
+    }
   }
 
   handleResize() {
@@ -177,6 +199,10 @@ export default class Visual {
       this.context.fill();
       // Reset blur so other drawings are not affected
       this.context.shadowBlur = 0;
+
+      if (this.mousePosition) {
+        this.handleMouseParticleInteraction(particle, this.mousePosition.x, this.mousePosition.y);
+      }
     });
   }
 
@@ -186,25 +212,24 @@ export default class Visual {
       particle.startY + particle.amplitude * Math.sin(((particle.x / sinSqueeze) * Math.PI) / 180);
   }
 
-  enlargeParticles(clientX: number, clientY: number) {
-    if (clientY < this.canvasHeight + 100) {
-      this.particles.forEach((particle) => {
-        const distance = Math.hypot(particle.x - clientX, particle.y - clientY);
+  handleMouseParticleInteraction(particle: Particle, mouseX: number, mouseY: number) {
+    const distance = Math.hypot(particle.x - mouseX, particle.y - mouseY);
+    if (distance <= 100) {
+      const scaling = (100 - distance) / 4;
+      this.changeParticleRadius(particle, particle.defaultRadius + scaling);
+    } else {
+      this.changeParticleRadius(particle, particle.defaultRadius);
+    }
+  }
 
-        if (distance <= 100) {
-          const scaling = (100 - distance) / 4;
-          gsap.to(particle, {
-            radius: particle.defaultRadius + scaling,
-            ease: Power2.easeOut,
-            duration: 0.5,
-          });
-        } else {
-          gsap.to(particle, {
-            radius: particle.defaultRadius,
-            ease: Power2.easeOut,
-            duration: 0.5,
-          });
-        }
+  changeParticleRadius(particle: Particle, desiredRadius: number) {
+    if (Math.abs(particle.radius - desiredRadius) < 0.1) {
+      particle.radius = desiredRadius;
+    } else {
+      gsap.to(particle, {
+        radius: desiredRadius,
+        ease: Power2.easeOut,
+        duration: 0.5,
       });
     }
   }
@@ -215,6 +240,11 @@ export default class Visual {
   }
 
   render(timestamp: DOMHighResTimeStamp) {
+    if (this.stopping) {
+      this.stopping = false;
+      return;
+    }
+
     if (!this.lastFrameTimestamp) this.lastFrameTimestamp = timestamp;
     let tslf = timestamp - this.lastFrameTimestamp; // elapsed time in ms since last frame
 

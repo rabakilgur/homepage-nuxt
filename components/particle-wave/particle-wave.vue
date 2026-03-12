@@ -1,11 +1,6 @@
 <script lang="ts" setup>
-import ParticleWaveModule from "./particle-wave-module";
-
 const canvas = useTemplateRef("canvas");
-
-onMounted(() => {
-  new ParticleWaveModule(canvas.value!);
-});
+useParticleWave(canvas);
 </script>
 
 <template>
