@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "@nuxt/image"],
+  modules: ["@nuxt/ui", "@nuxt/image", "@nuxtjs/i18n"],
   css: ["~/assets/css/tailwind.css", "~/assets/scss/main.scss"],
 
   ui: {
@@ -40,6 +40,14 @@ export default defineNuxtConfig({
         "stone",
       ],
     },
+  },
+
+  i18n: {
+    defaultLocale: "de",
+    locales: [
+      { code: "de", name: "Deutsch", file: "de.json" },
+      { code: "en", name: "English", file: "en.json" },
+    ],
   },
 
   app: {

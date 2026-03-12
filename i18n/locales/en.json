@@ -1,0 +1,221 @@
+{
+  "cvTooltip": "Open CV",
+  "currentRole": "Senior Cloud & Software Architect",
+  "heading": "I am Robin, Senior Cloud & Software Architect from Darmstadt.",
+  "subheading": "For over ten years, I have developed cloud and fullstack solutions with a focus on clean architecture, stable operations, and sustainable further development.",
+  "projectsBtn": "View Projects",
+  "focusBtn": "Technical Focus",
+  "about": "I am currently working at FlexHome.Energy on a platform for a more sustainable energy supply. It's important to me to develop software that has real company-wide impact and truly benefits users. My focus is ensuring frontend, backend, and cloud work seamlessly together — well implemented, user-friendly, scalable, and reliable.\n\nGreat software is built by great teams. That's exactly why I truly appreciate being part of such a team.",
+  "quickStats": [
+    {
+      "label": "Experience",
+      "value": "10+ Years"
+    },
+    {
+      "label": "Core Domains",
+      "value": "Cloud + Fullstack"
+    },
+    {
+      "label": "Current Role",
+      "value": "Senior Cloud & Software Architect"
+    }
+  ],
+  "experience": [
+    {
+      "position": "Senior Cloud and Software Architect",
+      "org": "FlexHome.Energy",
+      "period": "Oct 2024 – present",
+      "description": "Design and development of the cloud architecture and services for the FlexHome.Energy platform, including smart energy management solutions with bidirectional battery storage, backend with MQTT APIs and time series databases, an analytics and management console, and a REST API wrapper for customer onboarding.",
+      "tags": [
+        "AWS",
+        "K8s / RKE2",
+        "TypeScript",
+        "Vue / Nuxt",
+        "Node / Deno / Bun",
+        "InfluxDB",
+        "AI"
+      ],
+      "highlight": true
+    },
+    {
+      "position": "Senior Cloud and Software Engineer",
+      "org": "Solarnative",
+      "period": "Feb 2024 – Sep 2024",
+      "description": "Expansion of the AWS backend with robust APIs and time-series databases for data from microinverters and smart gateways for solar systems. Development of a comprehensive Electron application for R&D, manufacturing, and cloud engineering, integrating REST APIs and directly interfacing with hardware components.",
+      "tags": [
+        "AWS",
+        "TypeScript",
+        "Vue / Nuxt",
+        "Node",
+        "Electron",
+        "InfluxDB"
+      ]
+    },
+    {
+      "position": "Software Engineer in Management Information Systems",
+      "org": "ARZ Darmstadt",
+      "period": "Apr 2022 – Jan 2024",
+      "description": "Test-driven and agile full-stack development (TDD) of web applications. Development of Android apps and backends for ordering medication. Migration of critical services to a modern tech stack with API-first design and module federation.",
+      "tags": [
+        "TypeScript",
+        "Next.js",
+        "Angular",
+        "K8s / Docker",
+        "Java",
+        "Ruby on Rails",
+        "App Development"
+      ]
+    },
+    {
+      "position": "Working Student Developer in Management Information Systems",
+      "org": "ARZ Darmstadt",
+      "period": "Mar 2020 – Mar 2022",
+      "description": "Extension and new development of Android apps and container-based backends for ordering medication as well as the development of a test-driven full-stack application for nursing home ordering.",
+      "tags": [
+        "TypeScript",
+        "Next.js",
+        "K8s / Docker",
+        "Ruby on Rails",
+        "App Development"
+      ]
+    },
+    {
+      "position": "Working Student Developer",
+      "org": "EKHN",
+      "period": "Nov 2015 – Mar 2019",
+      "description": "Development of a web-based analytics platform as well as analysis and automated data processing with Excel and VBA.",
+      "tags": [
+        "JavaScript",
+        "PHP",
+        "VBA",
+        "Design"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "position": "Master of Science in Computer Science",
+      "org": "TU Darmstadt (Master)",
+      "period": "Apr 2022 – present",
+      "description": "Focus on internet- and web-based systems and AI/ML with specializations in computer vision, NLP / deep learning, statistical and continual learning, as well as additional modules in ambient intelligence, quantum computing, and AI security.",
+      "tags": [
+        "AI",
+        "System Design",
+        "UI/UX"
+      ]
+    },
+    {
+      "position": "Bachelor of Science in Computer Science",
+      "org": "TU Darmstadt (Bachelor)",
+      "period": "Oct 2015 – Mar 2022",
+      "description": "Focus on software and systems engineering, complemented by visual computing, HCI, embedded systems, and AI. Bachelor thesis: \"Analysis of the potential of user-driven adaptation and analysis tools for value chains.\"",
+      "tags": [
+        "UI/UX",
+        "System Design",
+        "CS Basics"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "FabApp",
+      "subtitle": "App for R&D, manufacturing and cloud engineering",
+      "description": "Versatile desktop application for research, manufacturing, support, and cloud engineering with AWS API integration and hardware interfaces.",
+      "tags": [
+        "Electron",
+        "Vue",
+        "Nuxt",
+        "Node",
+        "AWS"
+      ],
+      "imageSrc": "/proj/proj_FabApp.jpg",
+      "accentColor": "violet"
+    },
+    {
+      "title": "Apojet App",
+      "subtitle": "React Native Android App",
+      "description": "Further development of the existing Apojet App and development of a completely new Android app using React Native.",
+      "tags": [
+        "React Native",
+        "Android",
+        "App"
+      ],
+      "imageSrc": "/proj/proj_ApojetAndroidApp.png",
+      "link": "https://play.google.com/store/apps/details?id=de.cida.mobile.apojet",
+      "accentColor": "orange"
+    },
+    {
+      "title": "Spargelhof Mönich Website",
+      "subtitle": "Website with custom CMS solution",
+      "description": "Development of a website with a custom CMS solution, store locator, and OpenStreetMap integration.",
+      "tags": [
+        "CMS",
+        "Bootstrap",
+        "PHP",
+        "OpenStreetMap"
+      ],
+      "imageSrc": "/proj/proj_MoenichWebsite.jpg",
+      "link": "http://www.spargelhof-moenich.de/",
+      "accentColor": "yellow"
+    },
+    {
+      "title": "Thor Robot GUI",
+      "subtitle": "User interface for controlling the Thor robot",
+      "description": "Electron app for precise control of an open-source 6-axis robot in collaboration with FabLab Darmstadt.",
+      "tags": [
+        "Node",
+        "Electron",
+        "Robotics"
+      ],
+      "imageSrc": "/proj/proj_RobotControlGUI.jpg",
+      "link": "https://github.com/rabakilgur/ThorRobotGUI",
+      "accentColor": "amber"
+    },
+    {
+      "title": "Dice Project App",
+      "subtitle": "App for iOS, Android and Web",
+      "description": "Cross-platform dice app as an app development project, focusing on mobile and web-based usage.",
+      "tags": [
+        "PhoneGap",
+        "Hybrid App",
+        "Framework 7"
+      ],
+      "imageSrc": "/proj/proj_DiceProjectApp.jpg",
+      "link": "https://robin-garbe.de/p/dice_project",
+      "accentColor": "blue"
+    },
+    {
+      "title": "OPC Factory Control Panel",
+      "subtitle": "Program for controlling machines via OPC-UA",
+      "description": "Application developed as part of a bachelor's internship for dynamically sending tasks to industrial machines with an extensible architecture.",
+      "tags": [
+        "Node",
+        "Electron",
+        "OPC-UA"
+      ],
+      "imageSrc": "/proj/proj_OPCFactoryControlPanel.jpg",
+      "link": "https://github.com/rabakilgur/OPC_Factory_Control_Panel",
+      "accentColor": "stone"
+    }
+  ],
+  "contactLinks": [
+    {
+      "label": "Email",
+      "value": "contact{'@'}uhl.sh",
+      "href": "mailto:contact{'@'}uhl.sh",
+      "icon": "i-mdi-email"
+    },
+    {
+      "label": "Phone",
+      "value": "+49 159 0245 0748",
+      "href": "tel:+4915902450748",
+      "icon": "i-mdi-phone"
+    },
+    {
+      "label": "Location",
+      "value": "Darmstadt",
+      "href": "https://www.google.com/maps/place/Darmstadt/",
+      "icon": "i-mdi-map-marker"
+    }
+  ]
+}

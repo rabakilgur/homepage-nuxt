@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { locales, setLocale, locale } = useI18n();
+
 const shuffledTechnologies = deterministicShuffleArray(technologies, "name");
 const currentYear = new Date().getFullYear();
 </script>
@@ -6,22 +8,46 @@ const currentYear = new Date().getFullYear();
 <template>
   <div class="min-h-screen dark:bg-neutral-950/75">
     <header>
-      <UCard variant="subtle" class="fixed inset-x-0 top-3 z-50 mx-auto backdrop-blur-xl max-w-fit bg-default/70" :ui="{ body: 'py-3! px-3!' }">
-        <div class="absolute inset-0 opacity-4 dark:opacity-2 bg-noise"></div>
-        <div class="flex relative gap-3 justify-between items-center whitespace-nowrap">
-          <nav role="navigation">
-            <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
-            <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
-            <UButton href="#experience" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
-            <UButton href="#projects" as="a" color="neutral" variant="ghost" size="sm" class="max-[328px]:hidden">Projects</UButton>
-          </nav>
+      <div class="flex fixed inset-x-0 top-3 z-50 gap-3 mx-auto max-w-fit">
+        <UTooltip :text="$t('cvTooltip')" arrow :delay-duration="300" :content="{ side: 'bottom', sideOffset: 3 }">
+          <NuxtLink href="/cv" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden flex group">
+            <UCard variant="subtle" class="w-16 backdrop-blur-xl bg-default/70" :ui="{ root: 'flex items-center justify-center', body: 'p-0!' }">
+              <div class="flex gap-1 justify-center items-center px-2.5 py-1.5 text-xs font-medium rounded-md transition-colors group-hover:bg-elevated">CV</div>
+            </UCard>
+          </NuxtLink>
+        </UTooltip>
+        <UCard variant="subtle" class="backdrop-blur-xl bg-default/70" :ui="{ body: 'px-3! py-2.5!' }">
+          <div class="absolute inset-0 rounded-lg opacity-4 dark:opacity-2 bg-noise"></div>
+          <div class="flex relative gap-3 justify-between items-center whitespace-nowrap">
+            <nav role="navigation">
+              <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
+              <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
+              <UButton href="#experience" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
+              <UButton href="#projects" as="a" color="neutral" variant="ghost" size="sm" class="max-[328px]:hidden">Projects</UButton>
+            </nav>
 
-          <div class="flex gap-2 items-center">
-            <UColorModeButton color="primary" variant="soft" />
-            <UButton as="a" href="#contact" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact</UButton>
+            <div class="flex gap-2 items-center">
+              <UColorModeButton color="primary" variant="soft" class="cursor-pointer!" />
+              <UButton as="a" href="#contact" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact</UButton>
+            </div>
           </div>
-        </div>
-      </UCard>
+        </UCard>
+      </div>
+
+      <div class="fixed top-4 right-4 z-50">
+        <UButton
+          v-if="locale === 'de'"
+          color="neutral"
+          variant="outline"
+          size="sm"
+          class="px-3 py-2 cursor-pointer bg-(--ui-bg)/20 backdrop-blur ring-(--ui-border-accented)/30"
+          @click="setLocale('en')">
+          <UIcon name="i-flag-gb-4x3" class="size-5" /> EN
+        </UButton>
+        <UButton v-else color="neutral" variant="outline" size="sm" class="px-3 py-2 cursor-pointer bg-(--ui-bg)/20 backdrop-blur" @click="setLocale('de')">
+          <UIcon name="i-flag-de-4x3" class="size-5" /> DE
+        </UButton>
+      </div>
     </header>
 
     <main role="main">
@@ -33,28 +59,30 @@ const currentYear = new Date().getFullYear();
         <ParticleWave class="absolute top-0 left-0 w-full opacity-100 h-150" />
         <UContainer class="relative pt-20 pb-10 max-w-5xl sm:pt-24 sm:pb-14">
           <div class="mx-auto max-w-5xl text-center">
-            <UBadge color="primary" variant="soft" size="lg" class="mb-5 backdrop-blur"> Senior Cloud & Software Architect </UBadge>
+            <UBadge color="primary" variant="soft" size="lg" class="mb-5 backdrop-blur">
+              {{ $t("currentRole") }}
+            </UBadge>
             <h1 class="text-4xl font-bold tracking-tight leading-18 text-balance text-highlighted sm:text-6xl text-shadow-[0_0_10px_white] dark:text-shadow-[0_0_10px_var(--color-neutral-950)]">
-              Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.
+              {{ $t("heading") }}
             </h1>
             <p
               class="mx-auto mt-6 max-w-3xl text-balance text-lg leading-8 text-toned text-shadow-[0_0_1px_white,0_0_3px_white,0_0_6px_white,0_0_12px_white,0_0_24px_white,0_0_48px_white] dark:text-shadow-[0_0_4px_var(--color-neutral-950)]">
-              Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Lösungen mit Fokus auf sauberer Architektur, stabilem Systembetrieb und nachhaltiger Weiterentwicklung.
+              {{ $t("subheading") }}
             </p>
             <div class="flex flex-wrap gap-3 justify-center items-center mt-9">
-              <UButton as="a" href="#projects" color="primary" variant="solid" size="lg"> Projekte ansehen </UButton>
-              <UButton as="a" href="#focus" color="secondary" variant="soft" size="lg" class="backdrop-blur"> Technischer Fokus </UButton>
+              <UButton as="a" href="#projects" color="primary" variant="solid" size="lg"> {{ $t("projectsBtn") }} </UButton>
+              <UButton as="a" href="#focus" color="secondary" variant="soft" size="lg" class="backdrop-blur"> {{ $t("focusBtn") }} </UButton>
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
-            <UPageCard v-for="item in quickStats" :key="item.label" spotlight class="card-spotlight-subtle">
-              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+            <UPageCard v-for="item in $tm('quickStats')" :key="$rt(item.label)" spotlight class="card-spotlight-subtle">
+              <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="relative">
                 <div class="text-base font-semibold text-pretty text-highlighted">
-                  {{ item.label }}
+                  {{ $rt(item.label) }}
                 </div>
                 <div class="text-[15px] text-pretty text-muted mt-1">
-                  {{ item.value }}
+                  {{ $rt(item.value) }}
                 </div>
               </div>
             </UPageCard>
@@ -66,14 +94,11 @@ const currentYear = new Date().getFullYear();
         <Section id="about">
           <Heading>About</Heading>
           <UPageCard spotlight class="card-spotlight-subtle">
-            <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+            <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
             <div class="flex relative flex-col gap-2 px-4 leading-8 text-toned">
-              <p>
-                Ich arbeite aktuell bei FlexHome.Energy an einer Plattform für nachhaltigere Energieversorgung. Mir ist es wichtig, Software zu entwickeln, die unternehmensweit echten Impact hat und
-                Nutzern wirklich etwas bringt. Dabei liegt mein Fokus darauf, dass Frontend, Backend und Cloud reibungslos zusammenspielen – sauber umgesetzt, nutzerfreundlich, skalierbar und
-                zuverlässig.
+              <p v-for="paragraph in $t('about').split('\n\n')" :key="paragraph">
+                {{ paragraph }}
               </p>
-              <p>Großartige Software entsteht in großartigen Teams. Genau deshalb schätze ich es sehr, Teil eines solchen Teams zu sein.</p>
             </div>
           </UPageCard>
         </Section>
@@ -82,7 +107,7 @@ const currentYear = new Date().getFullYear();
           <Heading>Focus Areas</Heading>
           <div class="grid gap-4 min-[520px]:grid-cols-2 min-[820px]:grid-cols-3">
             <UPageCard v-for="area in focusAreas" :key="area.title" spotlight :spotlight-color="area.color" class="card-spotlight group">
-              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="overflow-hidden absolute inset-0">
                 <UIcon
                   :name="area.icon"
@@ -107,22 +132,22 @@ const currentYear = new Date().getFullYear();
           <Heading>Experience</Heading>
           <div class="grid gap-4">
             <UCard
-              v-for="item in experience"
-              :key="`${item.org}-${item.period}`"
+              v-for="item in $tm('experience')"
+              :key="`${$rt(item.org)}-${$rt(item.period)}`"
               variant="subtle"
               class="relative pr-4 pl-2 bg-transparent card-timeline"
               :class="{ 'bg-neutral-500/3 card-timeline--highlighted': item.highlight }">
-              <div v-if="item.highlight" class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div v-if="item.highlight" class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="flex relative flex-col gap-3 justify-between md:items-center md:flex-row">
-                <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
+                <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ $rt(item.period) }}</span>
                 <div class="grow">
                   <h3 class="inline-block text-xl font-semibold">
-                    {{ item.org }} <span class="text-lg text-muted">– {{ item.position }}</span>
+                    {{ $rt(item.org) }} <span class="text-lg text-muted">– {{ $rt(item.position) }}</span>
                   </h3>
-                  <p class="mt-2 text-muted">{{ item.description }}</p>
+                  <p class="mt-2 text-muted">{{ $rt(item.description) }}</p>
                   <div class="flex flex-wrap gap-2 mt-4">
                     <UBadge v-for="tag in item.tags" :key="tag" variant="subtle" size="sm" color="neutral">
-                      {{ tag }}
+                      {{ $rt(tag) }}
                     </UBadge>
                   </div>
                 </div>
@@ -134,23 +159,18 @@ const currentYear = new Date().getFullYear();
         <Section id="education">
           <Heading>Education</Heading>
           <div class="grid gap-4">
-            <UCard
-              v-for="item in education"
-              :key="`${item.org}-${item.period}`"
-              variant="subtle"
-              class="relative pr-4 pl-2 bg-transparent card-timeline"
-              :class="{ 'bg-neutral-500/5 dark:bg-neutral-500/10': item.highlight }">
+            <UCard v-for="item in $tm('education')" :key="`${$rt(item.org)}-${$rt(item.period)}`" variant="subtle" class="relative pr-4 pl-2 bg-transparent card-timeline">
               <div class="flex flex-col gap-3 justify-between md:items-center md:flex-row">
-                <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ item.period }}</span>
+                <span class="text-muted w-[21ch] lg:w-[35%] shrink-0">{{ $rt(item.period) }}</span>
                 <UIcon name="i-mdi-university" class="absolute -right-2 -bottom-6 rotate-14 text-neutral-500/7 size-40" />
                 <div class="grow">
                   <h3 class="inline-block text-xl font-semibold">
-                    {{ item.org }} <span class="text-lg text-muted">– {{ item.position }}</span>
+                    {{ $rt(item.org) }} <span class="text-lg text-muted">– {{ $rt(item.position) }}</span>
                   </h3>
-                  <p class="mt-2 text-muted">{{ item.description }}</p>
+                  <p class="mt-2 text-muted">{{ $rt(item.description) }}</p>
                   <div class="flex flex-wrap gap-2 mt-4">
                     <UBadge v-for="tag in item.tags" :key="tag" variant="subtle" size="sm" color="neutral">
-                      {{ tag }}
+                      {{ $rt(tag) }}
                     </UBadge>
                   </div>
                 </div>
@@ -163,52 +183,52 @@ const currentYear = new Date().getFullYear();
           <Heading>Selected Projects</Heading>
           <div class="grid gap-5">
             <UPageCard
-              v-for="(project, index) in projects"
-              :key="project.title"
+              v-for="(project, index) in $tm('projects')"
+              :key="$rt(project.title)"
               spotlight
-              :spotlight-color="project.accentColor"
+              :spotlight-color="$rt(project.accentColor) as CommonColor"
               class="p-0 transition-all duration-300 card-spotlight group hover:-translate-y-1"
               :ui="{
-                container: `overflow-hidden rounded-lg p-0! flex! flex-row! gap-0! ${index % 2 === 1 ? 'flex-row-reverse!' : ''}`,
+                container: `overflow-hidden rounded-lg p-0! flex! flex-row! gap-0! ${Number(index) % 2 === 1 ? 'flex-row-reverse!' : ''}`,
               }">
               <div
                 class="absolute inset-0 opacity-4"
-                :style="`background: linear-gradient(to ${index % 2 === 0 ? 'right' : 'left'}, transparent 60%, var(--ui-color-${project.accentColor}-500));`"></div>
-              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+                :style="`background: linear-gradient(to ${Number(index) % 2 === 0 ? 'right' : 'left'}, transparent 60%, var(--ui-color-${$rt(project.accentColor)}-500));`"></div>
+              <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div
                 class="hidden overflow-hidden relative w-80 shrink-0 grow-0 md:block"
                 :class="{
-                  '[clip-path:polygon(0%_0%,99%_0%,89%_100%,0%_100%)]': index % 2 === 0,
-                  '[clip-path:polygon(11%_0%,100%_0%,100%_100%,1%_100%)]': index % 2 === 1,
+                  '[clip-path:polygon(0%_0%,99%_0%,89%_100%,0%_100%)]': Number(index) % 2 === 0,
+                  '[clip-path:polygon(11%_0%,100%_0%,100%_100%,1%_100%)]': Number(index) % 2 === 1,
                 }">
-                <div :style="`background-image: url(${project.imageSrc})`" class="w-full h-full bg-center bg-cover transition-all duration-300 group-hover:rotate-1 group-hover:scale-103" />
+                <div :style="`background-image: url(${$rt(project.imageSrc)})`" class="w-full h-full bg-center bg-cover transition-all duration-300 group-hover:rotate-1 group-hover:scale-103" />
               </div>
-              <div class="relative px-8 my-5" :class="{ 'md:pl-6': index % 2 === 0 }">
-                <h3 class="mb-1 text-xl font-semibold text-highlighted">{{ project.title }}</h3>
+              <div class="relative px-8 my-5" :class="{ 'md:pl-6': Number(index) % 2 === 0 }">
+                <h3 class="mb-1 text-xl font-semibold text-highlighted">{{ $rt(project.title) }}</h3>
                 <p class="font-semibold tracking-wide text-toned">
-                  {{ project.subtitle }}
+                  {{ $rt(project.subtitle) }}
                 </p>
                 <div
                   class="mt-3.5 mb-2.5 w-14 h-[0.3rem] opacity-40 group-hover:opacity-60 rounded-full transition-all duration-300 group-hover:w-18"
-                  :style="`background-color: var(--ui-color-${project.accentColor}-500)`"></div>
-                <p class="text-sm leading-7 text-toned">{{ project.description }}</p>
+                  :style="`background-color: var(--ui-color-${$rt(project.accentColor)}-500)`"></div>
+                <p class="text-sm leading-7 text-toned">{{ $rt(project.description) }}</p>
                 <div class="flex flex-wrap gap-2 mt-4">
-                  <UBadge v-for="tag in project.tags" :key="`${project.title}-${tag}`" variant="subtle" size="sm" :color="project.accentColor">
-                    {{ tag }}
+                  <UBadge v-for="tag in project.tags" :key="`${$rt(project.title)}-${$rt(tag)}`" variant="subtle" size="sm" :color="$rt(project.accentColor) as CommonColor">
+                    {{ $rt(tag) }}
                   </UBadge>
                 </div>
                 <UButton
                   v-if="project.link"
                   as="a"
-                  :href="project.link"
+                  :href="$rt(project.link)"
                   target="_blank"
                   rel="noreferrer"
-                  :color="project.accentColor"
+                  :color="$rt(project.accentColor) as CommonColor"
                   variant="subtle"
                   size="sm"
                   icon="i-mdi-open-in-new"
                   class="absolute -bottom-1 right-4"
-                  :aria-label="`Open project '${project.title}' in new tab`">
+                  :aria-label="`Open project '${$rt(project.title)}' in new tab`">
                   Open Project
                 </UButton>
               </div>
@@ -219,29 +239,29 @@ const currentYear = new Date().getFullYear();
         <Section id="contact">
           <Heading>Contact</Heading>
           <div class="grid grid-cols-1 gap-4 mx-auto max-w-5xl sm:grid-cols-[1fr_14rem]">
-            <UPageCard v-for="(entry, index) in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
-              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+            <UPageCard v-for="entry in $tm('contactLinks')" :key="$rt(entry.label)" spotlight class="card-spotlight-subtle sm:col-start-1 group">
+              <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="flex relative flex-wrap gap-3 justify-between items-center">
                 <div>
-                  <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
+                  <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ $rt(entry.label) }}</p>
                   <a
                     class="block mt-1 text-lg font-semibold transition-colors duration-200 text-highlighted group-hover:underline"
                     :href="entry.href"
                     target="_blank"
                     rel="noreferrer"
                     :aria-label="entry.label">
-                    {{ entry.value }}
+                    {{ $rt(entry.value) }}
                   </a>
                 </div>
               </div>
               <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer" :aria-label="entry.label">
                 <UIcon
-                  :name="entry.icon"
+                  :name="$rt(entry.icon)"
                   class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24" />
               </a>
             </UPageCard>
             <UPageCard spotlight class="card-spotlight-subtle sm:col-start-2 sm:row-start-1 sm:row-span-3" :ui="{ container: 'md:grid justify-center md:gap-y-1!' }">
-              <div class="absolute inset-0 mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
+              <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <p class="relative text-xs font-semibold tracking-wide uppercase text-muted">Find me online</p>
               <div class="flex relative gap-7 justify-center items-center sm:flex-col">
                 <a
@@ -281,6 +301,19 @@ const currentYear = new Date().getFullYear();
 </template>
 
 <style lang="scss">
+.card-spotlight-wrapper {
+  --spotlight-color: color-mix(in srgb, var(--ui-color-neutral-500), transparent 95%);
+  --padding: 0.5rem;
+  backdrop-filter: blur(24px);
+  border-radius: calc(var(--ui-radius) + var(--padding) + 1px);
+  background: transparent;
+  > [data-slot="spotlight"] {
+    background: color-mix(in srgb, var(--ui-bg), transparent 70%);
+  }
+  > [data-slot="container"] {
+    padding: var(--padding);
+  }
+}
 .card-spotlight-subtle {
   --spotlight-color: color-mix(in srgb, var(--ui-color-neutral-500), transparent 70%);
 }
