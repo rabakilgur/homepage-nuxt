@@ -86,7 +86,7 @@ export const technologies: Technology[] = [
 ];
 
 export const profileLinks = [
-  { label: "LinkedIn", icon: "i-mdi-linkedin", href: "https://linkedin.com/in/robin-garbe" },
+  { label: "LinkedIn", icon: "i-mdi-linkedin", href: "https://linkedin.com/in/r-uhl" },
   { label: "GitHub", icon: "i-mdi-github", href: "https://github.com/rabakilgur" },
   { label: "CodePen", icon: "i-mdi-codepen", href: "https://codepen.io/rabakilgur" },
   { label: "Telegram", icon: "i-mdi-telegram", href: "https://t.me/rabakilgur" },
