@@ -1,13 +1,18 @@
 <script lang="ts" setup>
 const colorMode = useColorMode();
+const { t, tm } = useI18n();
 
-type CVLink = { label: string; value: string; href: string; icon: string };
-
-const cvLinks: CVLink[] = [
-  ...($tm("contactLinks") as CVLink[]).map((link: any) => ({ label: $rt(link.label), value: $rt(link.value), href: $rt(link.href), icon: $rt(link.icon) })),
+const cvLinks = computed<ContactLink[]>(() => [
+  ...(tm("contactLinks") as ContactLink[]).map((link, index) => ({
+    label: t(`contactLinks[${index}].label`),
+    value: link.value ? t(`contactLinks[${index}].value`) : undefined,
+    href: link.href ? t(`contactLinks[${index}].href`) : undefined,
+    icon: t(`contactLinks[${index}].icon`),
+    action: link.action ? (t(`contactLinks[${index}].action`) as ContactLinkAction) : undefined,
+  })),
   ...profileLinks.map((link) => ({ ...link, value: link.href })),
   { label: "Website", value: "https://uhl.sh", href: "https://uhl.sh", icon: "i-mdi-home" },
-];
+]);
 
 const strengths = [
   "Cloud architecture (AWS, containerized platforms, CI/CD)",
@@ -21,10 +26,6 @@ const languages = ["German (native)", "English (professional working proficiency
 function changeColorMode(mode: string) {
   document.startViewTransition(() => (colorMode.preference = mode));
 }
-
-onMounted(() => {
-  // alert("Halt! Who goes there?");
-});
 </script>
 
 <template>
@@ -58,10 +59,18 @@ onMounted(() => {
 
       <CvSection title="Contact">
         <div class="cv-contact-grid">
-          <a v-for="link in cvLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="cv-link">
-            <UIcon :name="link.icon" mode="svg" class="size-4 text-muted" />
-            <strong>{{ link.label }}:</strong> {{ link.value.replace("https://", "") }}
-          </a>
+          <template v-for="link in cvLinks" :key="link.label">
+            <a v-if="link.href" :href="link.href" target="_blank" rel="noreferrer" class="cv-link">
+              <UIcon :name="link.icon" mode="svg" class="size-4 text-muted" />
+              <strong>{{ link.label }}:</strong> {{ link.value?.replace("https://", "") }}
+            </a>
+            <button v-else-if="isActionContactLink(link)" type="button" class="cv-link" @click="openContactLink(link)">
+              <UIcon :name="link.icon" mode="svg" class="size-4 text-muted" />
+              <strong>{{ link.label }}:</strong>
+              <ContactEmail v-if="isEmailContactLink(link)" display-only />
+              <ContactPhone v-else-if="isPhoneContactLink(link)" display-only />
+            </button>
+          </template>
         </div>
       </CvSection>
 
@@ -229,8 +238,14 @@ onMounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  padding: 0;
   color: inherit;
+  font: inherit;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
   border-bottom: 1px solid transparent;
   width: fit-content;
   &:hover {

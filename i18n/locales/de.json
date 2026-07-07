@@ -201,15 +201,13 @@
   "contactLinks": [
     {
       "label": "E-Mail",
-      "value": "contact{'@'}uhl.sh",
-      "href": "mailto:contact{'@'}uhl.sh",
-      "icon": "i-mdi-email"
+      "icon": "i-mdi-email",
+      "action": "email"
     },
     {
       "label": "Telefon",
-      "value": "+49 159 0245 0748",
-      "href": "tel:+4915902450748",
-      "icon": "i-mdi-phone"
+      "icon": "i-mdi-phone",
+      "action": "phone"
     },
     {
       "label": "Standort",

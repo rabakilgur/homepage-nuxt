@@ -91,3 +91,78 @@ export const profileLinks = [
   { label: "CodePen", icon: "i-mdi-codepen", href: "https://codepen.io/rabakilgur" },
   { label: "Telegram", icon: "i-mdi-telegram", href: "https://t.me/rabakilgur" },
 ];
+
+export type ContactLinkAction = "email" | "phone";
+
+export type ContactLink = {
+  label: string;
+  value?: string;
+  href?: string;
+  icon: string;
+  action?: ContactLinkAction;
+};
+
+function reverseForObfuscation(value: string) {
+  return [...value].reverse().join("");
+}
+
+const EMAIL_LOCAL_PART = ["co", "nt", "act"].join("");
+const EMAIL_DOMAIN_PART = ["u", "hl", ".", "sh"].join("");
+const PHONE_COUNTRY_CODE = ["+", "4", "9"].join("");
+const PHONE_PARTS = [["1", "5", "9"].join(""), ["0", "2", "4", "5"].join(""), ["0", "7", "4", "8"].join("")];
+
+export function getObfuscatedEmailDisplayParts() {
+  return {
+    local: reverseForObfuscation(EMAIL_LOCAL_PART),
+    domain: reverseForObfuscation(EMAIL_DOMAIN_PART),
+  };
+}
+
+export function getObfuscatedPhoneDisplayParts() {
+  return [PHONE_COUNTRY_CODE, ...PHONE_PARTS].map(reverseForObfuscation);
+}
+
+function buildContactEmailAddress() {
+  return `${EMAIL_LOCAL_PART}@${EMAIL_DOMAIN_PART}`;
+}
+
+function buildContactPhoneNumber() {
+  return `${PHONE_COUNTRY_CODE}${PHONE_PARTS.join("")}`;
+}
+
+function openContactHref(href: string) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.rel = "noopener";
+  document.body.append(link);
+  link.click();
+  link.remove();
+}
+
+export function openContactEmail() {
+  openContactHref(`mailto:${buildContactEmailAddress()}`);
+}
+
+export function openContactPhone() {
+  openContactHref(`tel:${buildContactPhoneNumber()}`);
+}
+
+export function isEmailContactLink(link: Pick<ContactLink, "action" | "icon">) {
+  return link.action === "email" || link.icon === "i-mdi-email";
+}
+
+export function isPhoneContactLink(link: Pick<ContactLink, "action" | "icon">) {
+  return link.action === "phone" || link.icon === "i-mdi-phone";
+}
+
+export function isActionContactLink(link: Pick<ContactLink, "action" | "icon">) {
+  return isEmailContactLink(link) || isPhoneContactLink(link);
+}
+
+export function openContactLink(link: Pick<ContactLink, "action" | "icon">) {
+  if (isEmailContactLink(link)) {
+    openContactEmail();
+  } else if (isPhoneContactLink(link)) {
+    openContactPhone();
+  }
+}

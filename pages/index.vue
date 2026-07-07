@@ -1,6 +1,17 @@
 <script setup lang="ts">
+const { t, tm } = useI18n();
 const shuffledTechnologies = deterministicShuffleArray(technologies, "name");
 const currentYear = new Date().getFullYear();
+
+const contactLinks = computed<ContactLink[]>(() =>
+  (tm("contactLinks") as ContactLink[]).map((link, index) => ({
+    label: t(`contactLinks[${index}].label`),
+    value: link.value ? t(`contactLinks[${index}].value`) : undefined,
+    href: link.href ? t(`contactLinks[${index}].href`) : undefined,
+    icon: t(`contactLinks[${index}].icon`),
+    action: link.action ? (t(`contactLinks[${index}].action`) as ContactLinkAction) : undefined,
+  })),
+);
 </script>
 
 <template>
@@ -224,26 +235,47 @@ const currentYear = new Date().getFullYear();
         <Section id="contact">
           <Heading>Contact</Heading>
           <div class="grid grid-cols-1 gap-4 mx-auto max-w-5xl sm:grid-cols-[1fr_14rem]">
-            <UPageCard v-for="entry in $tm('contactLinks')" :key="$rt(entry.label)" spotlight class="card-spotlight-subtle sm:col-start-1 group">
+            <UPageCard v-for="entry in contactLinks" :key="entry.label" spotlight class="card-spotlight-subtle sm:col-start-1 group">
               <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
               <div class="flex relative flex-wrap gap-3 justify-between items-center">
-                <div>
-                  <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ $rt(entry.label) }}</p>
+                <div class="relative z-10" :class="{ 'pointer-events-none': isActionContactLink(entry) }">
+                  <p class="text-xs font-semibold tracking-wide uppercase text-muted">{{ entry.label }}</p>
                   <a
+                    v-if="entry.href"
                     class="block mt-1 text-lg font-semibold transition-colors duration-200 text-highlighted group-hover:underline"
                     :href="entry.href"
                     target="_blank"
                     rel="noreferrer"
                     :aria-label="entry.label">
-                    {{ $rt(entry.value) }}
+                    {{ entry.value }}
                   </a>
+                  <ContactEmail
+                    v-else-if="isEmailContactLink(entry)"
+                    variant="block"
+                    display-only
+                    class="text-highlighted group-hover:underline" />
+                  <ContactPhone
+                    v-else-if="isPhoneContactLink(entry)"
+                    variant="block"
+                    display-only
+                    class="text-highlighted group-hover:underline" />
                 </div>
               </div>
-              <a class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer" :aria-label="entry.label">
+              <a v-if="entry.href" class="block overflow-hidden absolute inset-0" :href="entry.href" target="_blank" rel="noreferrer" :aria-label="entry.label">
                 <UIcon
-                  :name="$rt(entry.icon)"
+                  :name="entry.icon"
                   class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24" />
               </a>
+              <button
+                v-else-if="isActionContactLink(entry)"
+                type="button"
+                class="block overflow-hidden absolute inset-0 p-0 bg-transparent border-0 cursor-pointer"
+                :aria-label="entry.label"
+                @click="openContactLink(entry)">
+                <UIcon
+                  :name="entry.icon"
+                  class="absolute -right-4 -bottom-4 transition-all duration-300 rotate-14 opacity-3 dark:opacity-1 group-hover:opacity-8 dark:group-hover:opacity-5 text-neutral size-24 pointer-events-none" />
+              </button>
             </UPageCard>
             <UPageCard spotlight class="card-spotlight-subtle sm:col-start-2 sm:row-start-1 sm:row-span-3" :ui="{ container: 'md:grid justify-center md:gap-y-1!' }">
               <div class="absolute inset-0 rounded-lg mix-blend-multiply brightness-150 dark:brightness-100 opacity-4 dark:opacity-25 bg-noise"></div>
