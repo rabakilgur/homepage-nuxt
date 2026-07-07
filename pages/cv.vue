@@ -80,7 +80,7 @@ onMounted(() => {
         </div> -->
         <div class="flex flex-col gap-4">
           <div v-for="item in $tm('experience')" :key="`${$rt(item.org)}-${$rt(item.period)}`">
-            <div class="flex relative flex-col gap-y-1 gap-x-5 justify-between md:items-center md:flex-row-reverse">
+            <div class="flex relative flex-col gap-y-1 gap-x-5 justify-between md:items-start md:flex-row-reverse">
               <span class="text-muted shrink-0 grow-0">{{ $rt(item.period) }}</span>
               <div class="grow">
                 <h3 class="inline-block font-semibold text-md">
@@ -115,7 +115,7 @@ onMounted(() => {
             <li v-for="item in strengths" :key="item">{{ item }}</li>
           </ul>
         </CvSection>
-        <div>
+        <div class="flex flex-col gap-5">
           <CvSection title="Languages">
             <ul class="cv-list">
               <li v-for="item in languages" :key="item">{{ item }}</li>
@@ -217,6 +217,7 @@ onMounted(() => {
 
 .cv-list {
   padding-left: 1.2rem;
+  list-style: disc;
 }
 
 .cv-tags {
