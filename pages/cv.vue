@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const { locales, setLocale, locale } = useI18n();
+const colorMode = useColorMode();
 
 type CVLink = { label: string; value: string; href: string; icon: string };
 
@@ -7,12 +7,6 @@ const cvLinks: CVLink[] = [
   ...($tm("contactLinks") as CVLink[]).map((link: any) => ({ label: $rt(link.label), value: $rt(link.value), href: $rt(link.href), icon: $rt(link.icon) })),
   ...profileLinks.map((link) => ({ ...link, value: link.href })),
   { label: "Website", value: "https://uhl.sh", href: "https://uhl.sh", icon: "i-mdi-home" },
-];
-
-const profileSummary = [
-  "Cloud and full-stack engineer with 10+ years of hands-on product development across web, mobile, and distributed backend systems.",
-  "Strong focus on cloud-native architecture, API-first design, and pragmatic engineering decisions that improve reliability and maintainability.",
-  "Combines technical depth with product thinking to ship scalable solutions from architecture to implementation.",
 ];
 
 const strengths = [
@@ -23,49 +17,88 @@ const strengths = [
 ];
 
 const languages = ["German (native)", "English (professional working proficiency)"];
+
+function changeColorMode(mode: string) {
+  document.startViewTransition(() => (colorMode.preference = mode));
+}
+
+onMounted(() => {
+  // alert("Halt! Who goes there?");
+});
 </script>
 
 <template>
-  <main class="cv-page">
-    <UPageCard spotlight class="cv-sheet">
-      <header class="cv-header">
+  <main class="flex justify-center items-center px-6 py-8 min-h-screen cv-page dark:bg-neutral-950/75 print:bg-white!">
+    <div class="flex fixed top-4 left-4 z-50 gap-2 items-center print:hidden">
+      <NuxtLink to="/">
+        <UButton color="neutral" variant="outline" size="sm" class="px-3 py-2 cursor-pointer bg-(--ui-bg)/20 backdrop-blur ring-(--ui-border-accented)/30">
+          <UIcon name="i-lucide-home" class="size-5" />
+        </UButton>
+      </NuxtLink>
+
+      <ClientOnly>
+        <UButton color="neutral" variant="outline" size="sm" class="px-3 py-2 cursor-pointer bg-(--ui-bg)/20 backdrop-blur ring-(--ui-border-accented)/30">
+          <template #fallback>
+            <UIcon name="i-lucide-moon" class="opacity-0 size-5" />
+          </template>
+          <UIcon v-show="colorMode.value === 'dark'" name="i-lucide-moon" class="size-5" @click="changeColorMode('light')" />
+          <UIcon v-show="colorMode.value === 'light'" name="i-lucide-sun" class="size-5" @click="changeColorMode('dark')" />
+        </UButton>
+      </ClientOnly>
+    </div>
+    <ButtonLocale class="fixed top-4 right-4 z-50 print:hidden" />
+
+    <UPageCard spotlight class="cv-sheet" :ui="{ container: 'p-0! print:bg-white!', spotlight: 'print:bg-white!' }">
+      <header class="flex gap-4 justify-between items-start pb-5 mb-6 border-b border-default">
         <div>
-          <h1 class="cv-name">Robin Uhl</h1>
-          <p class="cv-role">{{ $t("currentRole") }}</p>
+          <h1 class="m-0 text-[clamp(1.8rem,3vw,2.2rem)] leading-[1.15]">Robin Uhl</h1>
+          <p class="mt-[0.4rem] mb-0 ml-0 mr-0 text-[1.02rem] text-muted">{{ $t("currentRole") }}</p>
         </div>
       </header>
 
-      <section class="cv-section">
-        <h2 class="cv-title">Contact</h2>
+      <CvSection title="Contact">
         <div class="cv-contact-grid">
           <a v-for="link in cvLinks" :key="link.label" :href="link.href" target="_blank" rel="noreferrer" class="cv-link">
             <UIcon :name="link.icon" mode="svg" class="size-4 text-muted" />
             <strong>{{ link.label }}:</strong> {{ link.value.replace("https://", "") }}
           </a>
         </div>
-      </section>
+      </CvSection>
 
-      <section class="cv-section">
-        <h2 class="cv-title">Profile</h2>
-        <ul class="cv-list">
-          <li v-for="item in profileSummary" :key="item">{{ item }}</li>
-        </ul>
-      </section>
+      <CvSection title="About">
+        <p>{{ $t("about") }}</p>
+      </CvSection>
 
-      <section class="cv-section">
-        <h2 class="cv-title">Professional Experience</h2>
-        <div v-for="item in $tm('experience')" :key="`${$rt(item.org)}-${$rt(item.period)}`" class="cv-entry">
+      <CvSection title="Experience">
+        <!-- <div v-for="item in $tm('experience')" :key="`${$rt(item.org)}-${$rt(item.period)}`" class="cv-entry">
           <div class="cv-entry-heading">
             <h3>{{ $rt(item.position) }}, {{ $rt(item.org) }}</h3>
             <span>{{ $rt(item.period) }}</span>
           </div>
           <p>{{ $rt(item.description) }}</p>
           <p class="cv-tags"><strong>Technologies:</strong> {{ item.tags.map($rt).join(", ") }}</p>
+        </div> -->
+        <div class="flex flex-col gap-4">
+          <div v-for="item in $tm('experience')" :key="`${$rt(item.org)}-${$rt(item.period)}`">
+            <div class="flex relative flex-col gap-y-1 gap-x-5 justify-between md:items-center md:flex-row-reverse">
+              <span class="text-muted shrink-0 grow-0">{{ $rt(item.period) }}</span>
+              <div class="grow">
+                <h3 class="inline-block font-semibold text-md">
+                  {{ $rt(item.org) }} <span class="text-md text-muted">– {{ $rt(item.position) }}</span>
+                </h3>
+                <p class="mt-1">{{ $rt(item.description) }}</p>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <UBadge v-for="tag in item.tags" :key="tag" variant="subtle" size="sm" color="neutral">
+                    {{ $rt(tag) }}
+                  </UBadge>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </CvSection>
 
-      <section class="cv-section">
-        <h2 class="cv-title">Education</h2>
+      <CvSection title="Education">
         <div v-for="item in $tm('education')" :key="`${$rt(item.org)}-${$rt(item.period)}`" class="cv-entry">
           <div class="cv-entry-heading">
             <h3>{{ $rt(item.position) }}, {{ $rt(item.org) }}</h3>
@@ -74,68 +107,69 @@ const languages = ["German (native)", "English (professional working proficiency
           <p>{{ $rt(item.description) }}</p>
           <p class="cv-tags"><strong>Focus Areas:</strong> {{ item.tags.map($rt).join(", ") }}</p>
         </div>
-      </section>
+      </CvSection>
 
-      <section class="cv-section cv-grid-two">
-        <div>
-          <h2 class="cv-title">Key Strengths</h2>
+      <div class="cv-grid-two">
+        <CvSection title="Key Strengths">
           <ul class="cv-list">
             <li v-for="item in strengths" :key="item">{{ item }}</li>
           </ul>
-        </div>
+        </CvSection>
         <div>
-          <h2 class="cv-title">Languages</h2>
-          <ul class="cv-list">
-            <li v-for="item in languages" :key="item">{{ item }}</li>
-          </ul>
-          <h2 class="cv-title mt">References</h2>
-          <p>Available upon request.</p>
+          <CvSection title="Languages">
+            <ul class="cv-list">
+              <li v-for="item in languages" :key="item">{{ item }}</li>
+            </ul>
+          </CvSection>
+          <CvSection title="References">
+            <p>Available upon request.</p>
+          </CvSection>
         </div>
-      </section>
+      </div>
     </UPageCard>
   </main>
 </template>
 
 <style lang="scss" scoped>
-.cv-page {
-  display: flex;
-  justify-content: center;
-  padding: 2rem 1rem 3rem;
-  // background: var(--ui-bg);
-  color: var(--ui-text);
+:global(::view-transition-old(root)),
+:global(::view-transition-new(root)) {
+  animation-duration: 700ms;
+  animation-timing-function: ease-in-out;
+}
+:global(::view-transition-old(root)) {
+  animation-name: blurOut;
+}
+:global(::view-transition-new(root)) {
+  animation-name: blurIn;
+}
+
+@keyframes blurIn {
+  from {
+    filter: blur(10px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes blurOut {
+  from {
+    filter: blur(0);
+    opacity: 1;
+  }
+  to {
+    filter: blur(10px);
+    opacity: 0;
+  }
 }
 
 .cv-sheet {
-  // --spotlight-color: color-mix(in srgb, var(--ui-color-neutral-500), transparent 70%);
-  // --spotlight-size: 600px !important;
+  --spotlight-color: color-mix(in srgb, var(--ui-color-neutral-500), transparent 70%);
+  --spotlight-size: 600px;
   width: min(980px, 100%);
   padding: 2.25rem 2.5rem;
-  border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--ui-bg) 96%, var(--ui-text) 4%);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
   line-height: 1.55;
-}
-
-.cv-header {
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--ui-border);
-}
-
-.cv-name {
-  margin: 0;
-  font-size: clamp(1.8rem, 3vw, 2.2rem);
-  line-height: 1.15;
-}
-
-.cv-role {
-  margin: 0.4rem 0 0;
-  font-size: 1.02rem;
-  color: var(--ui-text-muted);
 }
 
 .cv-home-link {
@@ -146,17 +180,6 @@ const languages = ["German (native)", "English (professional working proficiency
 
 .cv-home-link:hover {
   border-bottom-color: currentColor;
-}
-
-.cv-section + .cv-section {
-  margin-top: 1.4rem;
-}
-
-.cv-title {
-  margin: 0 0 0.55rem;
-  font-size: 1rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
 }
 
 .cv-contact-grid {
@@ -231,6 +254,33 @@ const languages = ["German (native)", "English (professional working proficiency
 }
 
 @media print {
+  :global(.dark),
+  :global(body),
+  .cv-page {
+    // These variables are copied from the light mode
+    --ui-text-dimmed: var(--ui-color-neutral-400);
+    --ui-text-muted: var(--ui-color-neutral-500);
+    --ui-text-toned: var(--ui-color-neutral-600);
+    --ui-text: var(--ui-color-neutral-700);
+    --ui-text-highlighted: var(--ui-color-neutral-900);
+    --ui-text-inverted: #fff;
+    --ui-bg: #fff;
+    --ui-bg-muted: var(--ui-color-neutral-50);
+    --ui-bg-elevated: var(--ui-color-neutral-100);
+    --ui-bg-accented: var(--ui-color-neutral-200);
+    --ui-bg-inverted: var(--ui-color-neutral-900);
+    --ui-border: var(--ui-color-neutral-200);
+    --ui-border-muted: var(--ui-color-neutral-200);
+    --ui-border-accented: var(--ui-color-neutral-300);
+    --ui-border-inverted: var(--ui-color-neutral-900);
+    --ui-radius: 0.25rem;
+    --ui-container: 80rem;
+  }
+
+  :global(body::before) {
+    display: none;
+  }
+
   .cv-page {
     padding: 0;
     background: #fff;

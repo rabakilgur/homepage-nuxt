@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const { locales, setLocale, locale } = useI18n();
-
 const shuffledTechnologies = deterministicShuffleArray(technologies, "name");
 const currentYear = new Date().getFullYear();
 </script>
@@ -20,34 +18,21 @@ const currentYear = new Date().getFullYear();
           <div class="absolute inset-0 rounded-lg opacity-4 dark:opacity-2 bg-noise"></div>
           <div class="flex relative gap-3 justify-between items-center whitespace-nowrap">
             <nav role="navigation">
-              <UButton href="#about" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
-              <UButton href="#focus" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
-              <UButton href="#experience" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
-              <UButton href="#projects" as="a" color="neutral" variant="ghost" size="sm" class="max-[328px]:hidden">Projects</UButton>
+              <UButton href="#about" :locale="false" as="a" color="neutral" variant="ghost" size="sm" class="max-[434px]:hidden">About</UButton>
+              <UButton href="#focus" :locale="false" as="a" color="neutral" variant="ghost" size="sm" class="max-[374px]:hidden">Focus</UButton>
+              <UButton href="#experience" :locale="false" as="a" color="neutral" variant="ghost" size="sm">Experience</UButton>
+              <UButton href="#projects" :locale="false" as="a" color="neutral" variant="ghost" size="sm" class="max-[328px]:hidden">Projects</UButton>
             </nav>
 
             <div class="flex gap-2 items-center">
               <UColorModeButton color="primary" variant="soft" class="cursor-pointer!" />
-              <UButton as="a" href="#contact" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact</UButton>
+              <UButton as="a" href="#contact" :locale="false" color="primary" variant="solid" size="sm" class="whitespace-nowrap">Contact</UButton>
             </div>
           </div>
         </UCard>
       </div>
 
-      <div class="fixed top-4 right-4 z-50">
-        <UButton
-          v-if="locale === 'de'"
-          color="neutral"
-          variant="outline"
-          size="sm"
-          class="px-3 py-2 cursor-pointer bg-(--ui-bg)/20 backdrop-blur ring-(--ui-border-accented)/30"
-          @click="setLocale('en')">
-          <UIcon name="i-flag-gb-4x3" class="size-5" /> EN
-        </UButton>
-        <UButton v-else color="neutral" variant="outline" size="sm" class="px-3 py-2 cursor-pointer bg-(--ui-bg)/20 backdrop-blur" @click="setLocale('de')">
-          <UIcon name="i-flag-de-4x3" class="size-5" /> DE
-        </UButton>
-      </div>
+      <ButtonLocale class="fixed top-4 right-4 z-50" />
     </header>
 
     <main role="main">
@@ -70,8 +55,8 @@ const currentYear = new Date().getFullYear();
               {{ $t("subheading") }}
             </p>
             <div class="flex flex-wrap gap-3 justify-center items-center mt-9">
-              <UButton as="a" href="#projects" color="primary" variant="solid" size="lg"> {{ $t("projectsBtn") }} </UButton>
-              <UButton as="a" href="#focus" color="secondary" variant="soft" size="lg" class="backdrop-blur"> {{ $t("focusBtn") }} </UButton>
+              <UButton as="a" href="#projects" :locale="false" color="primary" variant="solid" size="lg"> {{ $t("projectsBtn") }} </UButton>
+              <UButton as="a" href="#focus" :locale="false" color="secondary" variant="soft" size="lg" class="backdrop-blur"> {{ $t("focusBtn") }} </UButton>
             </div>
           </div>
           <div class="grid gap-4 mx-auto mt-12 max-w-5xl md:grid-cols-3">
@@ -291,9 +276,9 @@ const currentYear = new Date().getFullYear();
         <p>Copyright {{ currentYear }}</p>
         <p class="mt-1">Made with ♥ by Robin Uhl</p>
         <div class="flex gap-2 justify-center items-center mt-4">
-          <UButton as="a" href="#about" variant="ghost" color="neutral" size="sm">About</UButton>
-          <UButton as="a" href="#projects" variant="ghost" color="neutral" size="sm">Projects</UButton>
-          <UButton as="a" href="#contact" variant="ghost" color="neutral" size="sm">Contact</UButton>
+          <UButton as="a" href="#about" :locale="false" variant="ghost" color="neutral" size="sm">About</UButton>
+          <UButton as="a" href="#projects" :locale="false" variant="ghost" color="neutral" size="sm">Projects</UButton>
+          <UButton as="a" href="#contact" :locale="false" variant="ghost" color="neutral" size="sm">Contact</UButton>
         </div>
       </UContainer>
     </footer>

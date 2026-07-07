@@ -121,6 +121,9 @@ export default defineNuxtConfig({
     // prerender index route by default
     "/": { prerender: true },
   },
+  build: {
+    transpile: ["@vercel/analytics", "@vercel/speed-insights"],
+  },
   vite: {
     plugins: [],
   },
