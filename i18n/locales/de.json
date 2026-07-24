@@ -12,12 +12,12 @@
       "value": "7+ Jahre"
     },
     {
-      "label": "Standort",
-      "value": "Darmstadt"
-    },
-    {
       "label": "Aktuelle Position",
       "value": "Senior Cloud & Software Architect"
+    },
+    {
+      "label": "Standort",
+      "value": "Darmstadt"
     }
   ],
   "experience": [
@@ -42,14 +42,7 @@
       "org": "Solarnative",
       "period": "Feb 2024 – Sep 2024",
       "description": "Ausbau des AWS-Backends mit robusten APIs und Time-Series-Datenbanken für Daten von Mikroinvertern und smarten Gateways für Solaranlagen. Entwicklung einer umfangreichen Electron-Anwendung für R&D, Fertigung und Cloud-Engineering, welche REST-APIs integriert und über Schnittstellen direkt mit Hardware-Komponenten kommuniziert.",
-      "tags": [
-        "AWS",
-        "TypeScript",
-        "Vue / Nuxt",
-        "Node",
-        "Electron",
-        "InfluxDB"
-      ]
+      "tags": ["AWS", "TypeScript", "Vue / Nuxt", "Node", "Electron", "InfluxDB"]
     },
     {
       "position": "Softwareingenieur im Bereich Management Information Systems",
@@ -71,25 +64,14 @@
       "org": "ARZ Darmstadt",
       "period": "Mar 2020 – Mar 2022",
       "description": "Erweiterung und Neuentwicklung von Android Apps und Container-based Backends zum Bestellen von Medikamenten sowie die Entwicklung einer testgetriebenen Full-Stack Applikation für die Heimbelieferung.",
-      "tags": [
-        "TypeScript",
-        "Next.js",
-        "K8s / Docker",
-        "Ruby on Rails",
-        "App Development"
-      ]
+      "tags": ["TypeScript", "Next.js", "K8s / Docker", "Ruby on Rails", "App Development"]
     },
     {
       "position": "Entwickler als Werksstudent",
       "org": "EKHN",
       "period": "Nov 2015 – Mar 2019",
       "description": "Entwicklung einer webbasierten Auswertungsplattform sowie Analyse und automatisierte Datenverarbeitung mit Excel und VBA.",
-      "tags": [
-        "JavaScript",
-        "PHP",
-        "VBA",
-        "Design"
-      ]
+      "tags": ["JavaScript", "PHP", "VBA", "Design"]
     }
   ],
   "education": [
@@ -98,22 +80,14 @@
       "org": "TU Darmstadt (Master)",
       "period": "Apr 2022 – heute",
       "description": "Schwerpunkt auf Internet-/Web-Systemen und KI/ML mit Vertiefung in Computer Vision, NLP / Deep Learning, statistischem und kontinuierlichem Lernen sowie ergänzenden Modulen in Ambient Intelligence, Quantencomputing und KI-Sicherheit.",
-      "tags": [
-        "AI",
-        "System Design",
-        "UI/UX"
-      ]
+      "tags": ["AI", "System Design", "UI/UX"]
     },
     {
       "position": "Bachelor of Science Informatik",
       "org": "TU Darmstadt (Bachelor)",
       "period": "Okt 2015 – Mar 2022",
       "description": "Fokus auf Software- und Systementwicklung, ergänzt durch Visual Computing, HCI, Embedded Systems und KI. Bachelorarbeit: \"Potenzialanalyse von benutzergesteuerten Anpassungs- und Analysewerkzeugen für Wertschöpfungsketten\"",
-      "tags": [
-        "UI/UX",
-        "System Design",
-        "CS Basics"
-      ]
+      "tags": ["UI/UX", "System Design", "CS Basics"]
     }
   ],
   "projects": [
@@ -121,13 +95,7 @@
       "title": "FabApp",
       "subtitle": "App für R&D, Fertigung und Cloud Engineering",
       "description": "Vielseitige Desktop-Anwendung für Forschung, Fertigung, Support und Cloud-Engineering mit AWS-API-Integration und Hardware-Schnittstellen.",
-      "tags": [
-        "Electron",
-        "Vue",
-        "Nuxt",
-        "Node",
-        "AWS"
-      ],
+      "tags": ["Electron", "Vue", "Nuxt", "Node", "AWS"],
       "imageSrc": "/proj/proj_FabApp.jpg",
       "accentColor": "violet"
     },
@@ -135,11 +103,7 @@
       "title": "Apojet App",
       "subtitle": "React Native Android App",
       "description": "Weiterentwicklung der bestehenden Apojet App und Entwicklung einer vollständig neuen Android App mit React Native.",
-      "tags": [
-        "React Native",
-        "Android",
-        "App"
-      ],
+      "tags": ["React Native", "Android", "App"],
       "imageSrc": "/proj/proj_ApojetAndroidApp.png",
       "link": "https://play.google.com/store/apps/details?id=de.cida.mobile.apojet",
       "accentColor": "orange"
@@ -148,12 +112,7 @@
       "title": "Spargelhof Mönich Webseite",
       "subtitle": "Webseite mit individueller CMS-Lösung",
       "description": "Entwicklung einer Webseite mit individueller CMS-Lösung, Verkaufsstellen-Finder und OpenStreetMap-Integration.",
-      "tags": [
-        "CMS",
-        "Bootstrap",
-        "PHP",
-        "OpenStreetMap"
-      ],
+      "tags": ["CMS", "Bootstrap", "PHP", "OpenStreetMap"],
       "imageSrc": "/proj/proj_MoenichWebsite.jpg",
       "link": "http://www.spargelhof-moenich.de/",
       "accentColor": "yellow"
@@ -162,11 +121,7 @@
       "title": "Thor Robot GUI",
       "subtitle": "Benutzeroberflache zur Steuerung des Thor-Roboters",
       "description": "Electron-App zur prazisen Steuerung eines Open-Source-6-Achsen-Roboters in Zusammenarbeit mit dem FabLab Darmstadt.",
-      "tags": [
-        "Node",
-        "Electron",
-        "Robotik"
-      ],
+      "tags": ["Node", "Electron", "Robotik"],
       "imageSrc": "/proj/proj_RobotControlGUI.jpg",
       "link": "https://github.com/rabakilgur/ThorRobotGUI",
       "accentColor": "amber"
@@ -175,11 +130,7 @@
       "title": "Dice Project App",
       "subtitle": "App für iOS, Android und Web",
       "description": "Cross-Plattform-Würfel-App als App-Development-Projekt mit Fokus auf mobile und webbasierte Nutzung.",
-      "tags": [
-        "PhoneGap",
-        "Hybrid App",
-        "Framework 7"
-      ],
+      "tags": ["PhoneGap", "Hybrid App", "Framework 7"],
       "imageSrc": "/proj/proj_DiceProjectApp.jpg",
       "link": "https://robin-garbe.de/p/dice_project",
       "accentColor": "blue"
@@ -188,11 +139,7 @@
       "title": "OPC Factory Control Panel",
       "subtitle": "Programm zur Steuerung von Maschinen via OPC-UA",
       "description": "Im Rahmen eines Bachelorpraktikums entwickelte Anwendung zum dynamischen Senden von Auftragen an industrielle Maschinen mit erweiterbarer Architektur.",
-      "tags": [
-        "Node",
-        "Electron",
-        "OPC-UA"
-      ],
+      "tags": ["Node", "Electron", "OPC-UA"],
       "imageSrc": "/proj/proj_OPCFactoryControlPanel.jpg",
       "link": "https://github.com/rabakilgur/OPC_Factory_Control_Panel",
       "accentColor": "stone"
