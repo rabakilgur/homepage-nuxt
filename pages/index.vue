@@ -30,7 +30,7 @@ const contactLinks = computed<ContactLink[]>(() =>
             color="neutral"
             variant="ghost"
             size="sm"
-            class="group flex max-[434px]:hidden"
+            class="group flex max-[468px]:hidden"
           >
             <UCard
               variant="subtle"
@@ -48,10 +48,14 @@ const contactLinks = computed<ContactLink[]>(() =>
         <UCard
           variant="subtle"
           class="backdrop-blur-xl bg-default/70"
-          :ui="{ body: 'px-3! py-2.5!' }"
+          :ui="{
+            body: 'px-3! py-2.5! max-[37rem]:px-2! max-[37rem]:py-1.5! max-[24.5rem]:px-1! max-[24.5rem]:py-1!',
+          }"
         >
           <div class="inset-0 rounded-lg bg-noise absolute opacity-4 dark:opacity-2"></div>
-          <div class="gap-3 relative flex items-center justify-between whitespace-nowrap">
+          <div
+            class="gap-3 max-[37rem]:gap-1 max-[24.5rem]:gap-0.5 relative flex items-center justify-between whitespace-nowrap"
+          >
             <nav role="navigation">
               <UButton
                 href="#about"
@@ -61,8 +65,9 @@ const contactLinks = computed<ContactLink[]>(() =>
                 variant="ghost"
                 size="sm"
                 class="max-[434px]:hidden"
-                >About</UButton
               >
+                About
+              </UButton>
               <UButton
                 href="#focus"
                 :locale="false"
@@ -71,8 +76,9 @@ const contactLinks = computed<ContactLink[]>(() =>
                 variant="ghost"
                 size="sm"
                 class="max-[374px]:hidden"
-                >Focus</UButton
               >
+                Focus
+              </UButton>
               <UButton
                 href="#experience"
                 :locale="false"
@@ -80,8 +86,9 @@ const contactLinks = computed<ContactLink[]>(() =>
                 color="neutral"
                 variant="ghost"
                 size="sm"
-                >Experience</UButton
               >
+                Experience
+              </UButton>
               <UButton
                 href="#projects"
                 :locale="false"
@@ -90,8 +97,9 @@ const contactLinks = computed<ContactLink[]>(() =>
                 variant="ghost"
                 size="sm"
                 class="max-[328px]:hidden"
-                >Projects</UButton
               >
+                Projects
+              </UButton>
             </nav>
 
             <div class="gap-2 flex items-center">
@@ -111,7 +119,9 @@ const contactLinks = computed<ContactLink[]>(() =>
         </UCard>
       </div>
 
-      <ButtonLocale class="top-4 right-4 fixed z-50" />
+      <ButtonLocale
+        class="top-4 right-4 max-[40rem]:top-16 fixed z-50 max-[40rem]:absolute max-[40rem]:z-49"
+      />
     </header>
 
     <main role="main">
@@ -131,7 +141,7 @@ const contactLinks = computed<ContactLink[]>(() =>
               {{ $t("currentRole") }}
             </UBadge>
             <h1
-              class="text-4xl font-bold tracking-tight leading-18 text-highlighted sm:text-6xl text-balance text-shadow-[0_0_10px_white] dark:text-shadow-[0_0_10px_var(--color-neutral-950)]"
+              class="text-4xl font-bold tracking-tight leading-13 sm:leading-18 text-highlighted sm:text-6xl text-balance text-shadow-[0_0_10px_white] dark:text-shadow-[0_0_10px_var(--color-neutral-950)]"
             >
               {{ $t("heading") }}
             </h1>
