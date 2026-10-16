@@ -82,6 +82,14 @@ dist
 # IDE / Editor
 .idea
 
+# AI coding assistants
+.claude
+.cursor
+.windsurf
+.codex
+.gemini
+.aider*
+
 # Service worker
 sw.*
 
