@@ -143,7 +143,7 @@ const contactLinks = computed<ContactLink[]>(() =>
         <UContainer class="pt-20 pb-10 max-w-5xl sm:pt-24 sm:pb-14 relative">
           <div class="max-w-5xl mx-auto text-center">
             <UBadge color="primary" variant="soft" size="lg" class="mb-5 backdrop-blur">
-              {{ $t("currentRole") }}
+              {{ $t("heroBadge") }}
             </UBadge>
             <h1
               class="text-4xl font-bold tracking-tight leading-13 sm:leading-18 text-highlighted sm:text-6xl text-balance text-shadow-[0_0_10px_white] dark:text-shadow-[0_0_10px_var(--color-neutral-950)]"
