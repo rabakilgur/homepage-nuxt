@@ -9,7 +9,7 @@
   "quickStats": [
     {
       "label": "Development Experience",
-      "value": "10+ Years"
+      "value": "{years}+ Years"
     },
     {
       "label": "Current Role",

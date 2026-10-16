@@ -2,6 +2,10 @@
 const { t, tm } = useI18n();
 const shuffledTechnologies = deterministicShuffleArray(technologies, "name");
 const currentYear = new Date().getFullYear();
+// Full years since the first developer job (Nov 2015)
+const yearsOfExperience = Math.floor(
+  (Date.now() - new Date(2015, 10).getTime()) / (365.25 * 24 * 60 * 60 * 1000),
+);
 
 const contactLinks = computed<ContactLink[]>(() =>
   (tm("contactLinks") as ContactLink[]).map((link, index) => ({
@@ -112,8 +116,9 @@ const contactLinks = computed<ContactLink[]>(() =>
                 variant="solid"
                 size="sm"
                 class="whitespace-nowrap"
-                >Contact</UButton
               >
+                Contact
+              </UButton>
             </div>
           </div>
         </UCard>
@@ -189,7 +194,7 @@ const contactLinks = computed<ContactLink[]>(() =>
                 }"
               ></div>
               <div class="text-2xl font-semibold text-highlighted text-balance">
-                {{ $rt(item.value) }}
+                {{ $rt(item.value, { years: yearsOfExperience }) }}
               </div>
               <div class="text-muted mt-1 text-[15px] text-balance">
                 {{ $rt(item.label) }}
