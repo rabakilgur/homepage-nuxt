@@ -1,19 +1,19 @@
 {
   "cvTooltip": "CV öffnen",
-  "currentRole": "Senior Cloud & Software Architect",
-  "heading": "Ich bin Robin, Senior Cloud & Software Architect aus Darmstadt.",
-  "subheading": "Seit über zehn Jahren entwickle ich Cloud- und Fullstack-Lösungen mit Fokus auf sauberer Architektur, stabilem Systembetrieb und nachhaltiger Weiterentwicklung.",
+  "currentRole": "Lead Cloud & Software Architect",
+  "heading": "Ich bin Robin, Lead Cloud & Software Architect aus Darmstadt.",
+  "subheading": "Seit 2015 entwickle ich Cloud- und Fullstack-Lösungen mit Fokus auf sauberer Architektur, stabilem Systembetrieb und nachhaltiger Weiterentwicklung.",
   "projectsBtn": "Projekte ansehen",
   "focusBtn": "Technischer Fokus",
-  "about": "Ich bin Senior Cloud & Software Architect und arbeite aktuell bei FlexHome.Energy an einer Plattform für eine nachhaltigere Energieversorgung. Mit über zehn Jahren Erfahrung im Entwerfen, Weiterentwickeln und Stabilisieren komplexer Web- und Cloud-Plattformen verbinde ich technische Führung durch Architektur, Standards und langfristige technische Entscheidungen mit hands-on Feature-Implementierung als starker Individual Contributor.\n\nMir ist es wichtig, Software zu entwickeln, die unternehmensweit echten Impact hat und Nutzern wirklich etwas bringt: Frontend, Backend und Cloud müssen nahtlos zusammenspielen, sauber umgesetzt, nutzerfreundlich, skalierbar und zuverlässig. Ich arbeite gerne in Teams, die sowohl Produktergebnisse als auch Engineering-Qualität ernst nehmen.",
+  "about": "Ich bin Lead Cloud & Software Architect und arbeite aktuell bei FlexHome.Energy an einer Plattform für eine nachhaltigere Energieversorgung. Seit 2015 entwickle ich professionell Software, heute mit Fokus auf das Entwerfen, Weiterentwickeln und Stabilisieren komplexer Web- und Cloud-Plattformen. Dabei verbinde ich technische Führung durch Architektur, Standards und langfristige technische Entscheidungen mit hands-on Feature-Implementierung als starker Individual Contributor.\n\nMir ist es wichtig, Software zu entwickeln, die unternehmensweit echten Impact hat und Nutzern wirklich etwas bringt: Frontend, Backend und Cloud müssen nahtlos zusammenspielen, sauber umgesetzt, nutzerfreundlich, skalierbar und zuverlässig. Ich arbeite gerne in Teams, die sowohl Produktergebnisse als auch Engineering-Qualität ernst nehmen.",
   "quickStats": [
     {
-      "label": "Erfahrung",
-      "value": "7+ Jahre"
+      "label": "Entwicklungserfahrung",
+      "value": "10+ Jahre"
     },
     {
       "label": "Aktuelle Position",
-      "value": "Senior Cloud & Software Architect"
+      "value": "Lead Cloud & Software Architect"
     },
     {
       "label": "Standort",
@@ -22,9 +22,25 @@
   ],
   "experience": [
     {
-      "position": "Senior Cloud and Software Architect",
+      "position": "Lead Cloud & Software Architect",
       "org": "FlexHome.Energy",
-      "period": "Okt 2024 – heute",
+      "period": "Sep 2026 – heute",
+      "description": "Architektur und technische Leitung der Cloud- und IoT-Plattform von FlexHome.Energy mit Verantwortung für Skalierbarkeit, Stabilität und Sicherheit. Aufbau von Backend-, Daten- und Kubernetes-Infrastrukturen, Definition technischer Standards, Mentoring von Entwickler:innen und Ansprechpartner für KI-Themen.",
+      "tags": [
+        "Cloud Architecture",
+        "Technical Leadership",
+        "IoT",
+        "AWS",
+        "K8s / RKE2",
+        "TypeScript",
+        "AI"
+      ],
+      "highlight": true
+    },
+    {
+      "position": "Senior Cloud & Software Architect",
+      "org": "FlexHome.Energy",
+      "period": "Okt 2024 – Aug 2026",
       "description": "Entwurf und Entwicklung der Cloud-Architektur und Services für die FlexHome.Energy Plattform, inklusive smarter Energiemanagement-Lösungen mit bidirektionalen Batteriespeichern, Backend mit MQTT-APIs und Zeitreihendatenbanken, einer Analyse- und Verwaltungskonsole und einem REST API-Wrapper für Kunden-Onboarding.",
       "tags": [
         "AWS",
@@ -34,11 +50,10 @@
         "Node / Deno / Bun",
         "InfluxDB",
         "AI"
-      ],
-      "highlight": true
+      ]
     },
     {
-      "position": "Senior Cloud and Software Engineer",
+      "position": "Senior Cloud & Software Engineer",
       "org": "Solarnative",
       "period": "Feb 2024 – Sep 2024",
       "description": "Ausbau des AWS-Backends mit robusten APIs und Time-Series-Datenbanken für Daten von Mikroinvertern und smarten Gateways für Solaranlagen. Entwicklung einer umfangreichen Electron-Anwendung für R&D, Fertigung und Cloud-Engineering, welche REST-APIs integriert und über Schnittstellen direkt mit Hardware-Komponenten kommuniziert.",
@@ -56,7 +71,7 @@
         "K8s / Docker",
         "Java",
         "Ruby on Rails",
-        "App Development"
+        "App Entwicklung"
       ]
     },
     {
@@ -64,21 +79,21 @@
       "org": "ARZ Darmstadt",
       "period": "Mar 2020 – Mar 2022",
       "description": "Erweiterung und Neuentwicklung von Android Apps und Container-based Backends zum Bestellen von Medikamenten sowie die Entwicklung einer testgetriebenen Full-Stack Applikation für die Heimbelieferung.",
-      "tags": ["TypeScript", "Next.js", "K8s / Docker", "Ruby on Rails", "App Development"]
+      "tags": ["TypeScript", "Next.js", "K8s / Docker", "Ruby on Rails", "App Entwicklung"]
     },
     {
       "position": "Entwickler als Werksstudent",
       "org": "EKHN",
       "period": "Nov 2015 – Mar 2019",
       "description": "Entwicklung einer webbasierten Auswertungsplattform sowie Analyse und automatisierte Datenverarbeitung mit Excel und VBA.",
-      "tags": ["JavaScript", "PHP", "VBA", "Design"]
+      "tags": ["JavaScript", "PHP", "VBA", "jQuery", "Design"]
     }
   ],
   "education": [
     {
       "position": "Master of Science Informatik",
       "org": "TU Darmstadt (Master)",
-      "period": "Apr 2022 – heute",
+      "period": "Apr 2022 – Okt 2026",
       "description": "Schwerpunkt auf Internet-/Web-Systemen und KI/ML mit Vertiefung in Computer Vision, NLP / Deep Learning, statistischem und kontinuierlichem Lernen sowie ergänzenden Modulen in Ambient Intelligence, Quantencomputing und KI-Sicherheit.",
       "tags": ["AI", "System Design", "UI/UX"]
     },
