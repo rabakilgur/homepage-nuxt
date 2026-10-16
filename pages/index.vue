@@ -277,8 +277,10 @@ const contactLinks = computed<ContactLink[]>(() =>
                 v-if="item.highlight"
                 class="inset-0 rounded-lg bg-noise absolute opacity-4 mix-blend-multiply brightness-150 dark:opacity-25 dark:brightness-100"
               ></div>
-              <div class="gap-3 md:items-center md:flex-row relative flex flex-col justify-between">
-                <span class="text-muted lg:w-[35%] w-[21ch] shrink-0">{{ $rt(item.period) }}</span>
+              <div class="gap-3 md:flex-row relative flex flex-col justify-between">
+                <span class="text-muted lg:w-[35%] py-0.5 w-[21ch] shrink-0">{{
+                  $rt(item.period)
+                }}</span>
                 <div class="grow">
                   <h3 class="text-xl font-semibold inline-block">
                     {{ $rt(item.org) }}
@@ -311,8 +313,10 @@ const contactLinks = computed<ContactLink[]>(() =>
               variant="subtle"
               class="pr-4 pl-2 card-timeline relative bg-transparent"
             >
-              <div class="gap-3 md:items-center md:flex-row flex flex-col justify-between">
-                <span class="text-muted lg:w-[35%] w-[21ch] shrink-0">{{ $rt(item.period) }}</span>
+              <div class="gap-3 md:flex-row flex flex-col justify-between">
+                <span class="text-muted lg:w-[35%] py-0.5 w-[21ch] shrink-0">
+                  {{ $rt(item.period) }}
+                </span>
                 <UIcon
                   name="i-mdi-university"
                   class="-right-2 -bottom-6 text-neutral-500/7 size-40 absolute rotate-14"
@@ -322,7 +326,9 @@ const contactLinks = computed<ContactLink[]>(() =>
                     {{ $rt(item.org) }}
                     <span class="text-lg text-muted">– {{ $rt(item.position) }}</span>
                   </h3>
-                  <p class="mt-2 text-muted">{{ $rt(item.description) }}</p>
+                  <p class="mt-2 text-muted">
+                    {{ $rt(item.description) }}
+                  </p>
                   <div class="gap-2 mt-4 flex flex-wrap">
                     <UBadge
                       v-for="tag in item.tags"
