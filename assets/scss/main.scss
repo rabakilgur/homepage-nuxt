@@ -4,6 +4,15 @@ body {
   --ui-radius: 0.3rem;
   position: relative;
   background-image:
+    radial-gradient(ellipse 80% 150svh at 50% -20%, color-mix(in oklch, var(--ui-primary) 20%, transparent), transparent),
+    radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ui-text-muted) 10%, transparent) 1px, transparent 0);
+  background-size:
+    100% 100%,
+    16px 16px;
+}
+
+html.dark body {
+  background-image:
     radial-gradient(ellipse 80% 150svh at 50% -20%, color-mix(in oklch, var(--ui-primary) 80%, transparent), transparent),
     radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ui-text-muted) 25%, transparent) 1px, transparent 0);
   background-size:
